@@ -1,0 +1,6 @@
+.place__name {
+  max-width: 70%;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+}

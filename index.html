@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title>MESTO Russia</title>
+    <link rel="stylesheet" href="pages/index.css">
+</head>
+<body>
+    <div class="page">
+        <!-- ШАПКА САЙТА БЛОК 1 -->
+        <header class="header">
+            <img src="images/LogoMestoWhite.svg" alt="Логотип" class="header__logo">
+        </header>
+        <!-- ПРОФИЛЬ БЛОК 2 -->
+        <section class="profile">
+            <img src="images/Jacques-Yves_Cousteau.jpg" alt="Жак-Ив Кусто" class="profile__image">
+            <div class="profile__container">
+                <div class="profile__button-wrapper">
+                    <h1 class="profile__title">жак-ив кусто</h1>
+                    <button class="profile__edit-btn"></button>
+                </div>
+                <p class="profile__profession">Исследователь океана</p>
+            </div>
+        <!-- POP-UP -->
+            <div class="popup">
+                <form class="popup__container">
+                    <h3 class="popup__title">Редактировать профиль</h3>
+                    <button class="popup__close-icon">
+                        <img src="images/Close-icon.svg" alt="Закрыть">
+                    </button>
+                    <input type="text" name="name" placeholder="Имя" id="name" class="popup__name"> 
+                    <input type="text" name="profession" placeholder="О себе" id="profession" class="popup__profession">
+                    <button type="submit" class="popup__save">Сохранить</button>
+                </form>
+            </div>
+            <button class="profile__add-btn"></button>
+        </section>
+        <!-- МЕСТА БЛОК 3 -->
+        <section class="places">
+            <div class="place">
+                <img src="images/Karachayevsk.jpg" alt="Карачаевск" class="place__image">
+                <div class="place__info">
+                    <h2 class="place__name">карачаевск</h2>
+                    <button class="place__like-icon"><img src="images/Like-icon.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img src="images/Elbrus.jpg" alt="Гора Эльбрус" class="place__image">
+                <div class="place__info">
+                    <h2 class="place__name">гора эльбрус</h2>
+                    <button class="place__like-icon"><img src="images/Like-icon.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img src="images/Dombai.jpg" alt="Домбай" class="place__image">
+                <div class="place__info">
+                    <h2 class="place__name">домбай</h2>
+                    <button class="place__like-icon"><img src="images/Like-icon.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img src="images/Yosemite_Valley.jpg" alt="Йосемитская долина Сьерра Невада" class="place__image">
+                <div class="place__info">
+                    <h2 class="place__name">сьерра невада</h2>
+                    <button class="place__like-icon"><img src="images/Like-icon.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img src="images/Lago_di_Braies.jpg" alt="Лаго ди Брайес" class="place__image">
+                <div class="place__info">
+                    <h2 class="place__name">лаго ди брайес</h2>
+                    <button class="place__like-icon"><img src="images/Like-icon.svg" alt="Лайк"></button>
+                </div>
+            </div>
+            <div class="place">
+                <img src="images/Ko_Hong.jpg" alt="Ко Чанг" class="place__image">
+                <div class="place__info">
+                    <h2 class="place__name">ко чанг</h2>
+                    <button class="place__like-icon"><img src="images/Like-icon.svg" alt="Лайк"></button>
+                </div>
+            </div>
+        </section>
+        <!-- ПОДВАЛ БЛОК 4 -->
+        <footer class="footer">
+            <nav class="footer__info">
+                <span class="footer__copyright">&copy; 2020 Ильин Владимир</span>
+            </nav>
+        </footer>
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
