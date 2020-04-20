@@ -1,9 +1,14 @@
 .place__like-icon {
-  max-width: 20px;
-  max-height: 20px;
+  width: 21px;
+  height: 19px;
   border: none;
-  background-color: #fff;
+  background-color: #FFF;
   align-self: center;
+  margin-right: 22px;
+  margin-left: auto;
+  background-image: url('../../../images/like-icon.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .place__like-icon:hover {

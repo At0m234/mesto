@@ -1,18 +1,28 @@
-const editBtn = document.querySelector('.profile__edit-btn');
+const editBtn = document.querySelector('.profile__edit-btn');  
 const closeIcon = document.querySelector('.popup__close-icon');
 const saveBtn = document.querySelector('.popup__save');
 const popup = document.querySelector('.popup');
 
-editBtn.addEventListener('click', function popupOpened() {
+// Функция открытия модального окна
+function popupOpened() {
     popup.classList.add('popup_opened');
-})
+    document.querySelector('.popup__text_name').value = document.querySelector('.profile__title').textContent;
+    document.querySelector('.popup__text_profession').value = document.querySelector('.profile__profession').textContent;
+}
 
-closeIcon.addEventListener('click', function popupClosed() {
+// Функция закрытия модального окна
+function popupClosed() {
     popup.classList.remove('popup_opened');
-})
+    document.querySelector('.popup__text_name').value = document.querySelector('.profile__title').textContent;
+    document.querySelector('.popup__text_profession').value = document.querySelector('.profile__profession').textContent;
+}
 
-document.getElementById('name').value = document.querySelector('.profile__title').textContent;
-document.getElementById('profession').value = document.querySelector('.profile__profession').textContent;
+// Слушатель на открытие модального окна по клику на кнопку
+editBtn.addEventListener('click', popupOpened);
+// Слушатель на закрытие модального окна по клику на кнопку
+closeIcon.addEventListener('click', popupClosed);
+
+
 
     // Находим форму в DOM
 let popupContainer = document.querySelector('.popup__container');
@@ -25,8 +35,8 @@ let popupContainer = document.querySelector('.popup__container');
                                     // О том, как это делать, расскажем позже.
 
         // Находим поля формы в DOM
-        let nameInput = document.querySelector('.popup__name');
-        let jobInput = document.querySelector('.popup__profession');
+        let nameInput = document.querySelector('.popup__text_name');
+        let jobInput = document.querySelector('.popup__text_profession');
         // Получите значение полей из свойства value
         nameInput = nameInput.value;
         jobInput = jobInput.value;
@@ -37,7 +47,8 @@ let popupContainer = document.querySelector('.popup__container');
         profileTitle.textContent = nameInput;
         profileProfession.textContent = jobInput;
         
-        popup.classList.remove('popup_opened');
+        // Вызываем функцию закрытия модального окна
+        popupClosed();
 }
 
     // Прикрепляем обработчик к форме:

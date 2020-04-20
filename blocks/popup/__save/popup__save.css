@@ -15,6 +15,6 @@
 
 .popup__save:hover {
   transition: 0.1s linear 0.1s;
-  opacity: 0.8;
+  background-color: #313131;
   cursor: pointer;
 }

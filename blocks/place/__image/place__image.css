@@ -1,14 +1,7 @@
 .place__image {
   display: grid;
-  max-width: 282px;
-  max-height: 282px;
-}
-
-img.place__image {
-  background-size: contain;
-  background-position: center;
-  min-width: 282px;
-  min-height: 282px;
+  width: 282px;
+  height: 282px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
