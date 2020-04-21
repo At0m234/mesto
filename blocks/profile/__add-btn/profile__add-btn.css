@@ -19,7 +19,7 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
   .profile__add-btn {
     justify-items: center;
     background-position: center;
@@ -31,12 +31,13 @@
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .profile__add-btn {
     width: 100%;
     max-width: 320px;
     min-width: 280px;
     background-size: 40% 40%;
     margin: 0 auto;
+    grid-row: 3/4;
   }
 }

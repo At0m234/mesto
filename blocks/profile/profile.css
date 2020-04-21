@@ -14,10 +14,10 @@
   align-items: center;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (max-width: 1023px) {
   .profile {
     display: grid;
-    grid-template-columns: fit-content;
+    grid-template-columns: fit-content(282px);
     grid-template-rows: repeat(2, fit-content);
     justify-content: center;
     margin: 0 auto 35px auto;
@@ -25,15 +25,15 @@
   }
 }
 
-@media screen and (min-width: 300px) and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .profile {
     display: grid;
     grid-template-columns: fit-content(282px);
     grid-template-rows: repeat(3, fit-content);
-    justify-content: center;
     justify-items: center;
     width: 87.5%;
     max-width: 320px;
     margin: 0 auto 31px auto;
+    grid-row-gap: 0;
   }
 }
