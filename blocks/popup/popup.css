@@ -5,9 +5,12 @@
 @import url("__container/popup__container.css");
 @import url("__close-icon/popup__close-icon.css");
 @import url("_opened/popup_opened.css");
+@import url("__img-container/popup__img-container.css");
+@import url("__big-img/popup__big-img.css");
+@import url("__caption/popup__caption.css");
 
 .popup {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -19,6 +22,9 @@
   height: 100%;
   overflow: hidden;
   z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s ease-in-out;
 }
 
 /* Если удалить отсюда модификатор блока, то функция открытия попап не срабатывает, display: none; не меняется на display:flex;. 
@@ -26,5 +32,7 @@
 а из стилей .popup вообще удалить свойство display */
 
 .popup_opened {                    
-  display: flex;                   
+  display: flex;   
+  visibility: visible;
+  opacity: 1;        
 }

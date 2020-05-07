@@ -24,54 +24,22 @@
             </div>
             <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
         </section>
-        <!-- МЕСТА БЛОК 3 -->
-        <section class="places">
-            <div class="place">
-                <img src="images/karachayevsk.jpg" alt="Карачаевск" class="place__image">
-                <div class="place__info">
-                    <h2 class="place__name">карачаевск</h2>
-                    <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
+         <!-- МЕСТА БЛОК 3 -->
+         <section class="places">
+            <template id="place_template">
+                <div class="place">
+                    <img src="images/trash.svg" alt="Удалить" class="place__trash">
+                    <img src="" alt="" class="place__image">
+                    <div class="place__info">
+                        <h2 class="place__name"></h2>
+                        <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
+                    </div>
                 </div>
-            </div>
-            <div class="place">
-                <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="place__image">
-                <div class="place__info">
-                    <h2 class="place__name">гора эльбрус</h2>
-                    <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="images/dombai.jpg" alt="Домбай" class="place__image">
-                <div class="place__info">
-                    <h2 class="place__name">домбай</h2>
-                    <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="images/yosemite_valley.jpg" alt="Йосемитская долина Сьерра Невада" class="place__image">
-                <div class="place__info">
-                    <h2 class="place__name">сьерра невада</h2>
-                    <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="images/lago_di_braies.jpg" alt="Лаго ди Брайес" class="place__image">
-                <div class="place__info">
-                    <h2 class="place__name">лаго ди брайес</h2>
-                    <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-                </div>
-            </div>
-            <div class="place">
-                <img src="images/ko_hong.jpg" alt="Ко Чанг" class="place__image">
-                <div class="place__info">
-                    <h2 class="place__name">ко чанг</h2>
-                    <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-                </div>
-            </div>
+            </template>
         </section>
-         <!-- POP-UP -->
-        <section class="popup">
-            <form name="popup" method="GET" action="#" class="popup__container">
+         <!-- EDIT POP-UP -->
+        <section class="popup" id="popup_edit">
+            <form name="popup" method="GET" action="#" class="popup__container" id="edit_container">
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <button type="button" aria-label="Закрыть" class="popup__close-icon"></button>
                 <input type="text" name="name" required placeholder="Имя" id="name" class="popup__text popup__text_name"> 
@@ -79,6 +47,24 @@
                 <button type="submit" class="popup__save">Сохранить</button>
             </form>
         </section>
+        <!-- ADD POP-UP -->
+        <section class="popup" id="popup_add">
+            <form name="popup" method="GET" action="#" class="popup__container" id="add_container">
+                <h3 class="popup__title">Новое место</h3>
+                <button type="button" aria-label="Закрыть" class="popup__close-icon" id="addPopupClose"></button>
+                <input type="text" name="title" required placeholder="Название" id="title" class="popup__text popup__text_name"> 
+                <input type="text" name="place_url" required placeholder="Ссылка на картинку" id="placeUrl" class="popup__text popup__text_profession">
+                <button type="submit" class="popup__save">Создать</button>
+            </form>
+        </section>
+        <!-- IMG POP-UP -->
+        <section class="popup" id="popup_img">
+            <figure class="popup__img-container" id="img_container">
+              <button type="button" aria-label="Закрыть" class="popup__close-icon popup__close-icon_img" id="imgPopupClose"></button>
+              <img src="" alt="" class="popup__big-img">
+              <figcaption class="popup__caption"></figcaption>
+            </figure>
+          </section>
         <!-- ПОДВАЛ БЛОК 4 -->
         <footer class="footer">
             <nav class="footer__info">
