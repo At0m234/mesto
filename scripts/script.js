@@ -33,15 +33,15 @@ const initialCards = [
     },
     {
         name: 'сьерра невада',
-        link: 'images/yosemite_valley.jpg'
+        link: 'images/yosemiteValley.jpg'
     },
     {
         name: 'лаго ди брайес',
-        link: 'images/lago_di_braies.jpg'
+        link: 'images/lagoDiBraies.jpg'
     },
     {
         name: 'ко чанг',
-        link: 'images/ko_hong.jpg'
+        link: 'images/koHong.jpg'
     }
 ];
 
