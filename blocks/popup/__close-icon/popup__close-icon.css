@@ -1,5 +1,4 @@
-
-@import url('_img/popup__close-icon_img.css');
+@import url(_img/popup__close-icon_img.css);
 
 .popup__close-icon {
   width: 45px;
@@ -10,14 +9,14 @@
   margin-left: 228px;
   margin-top: -32px;
   position: absolute;
-  background-image: url("../../../images/Close-icon.svg");
+  background-image: url(../../../images/Close-icon.svg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
 .popup__close-icon:hover {
-  transition: 0.1s ease-in 0.1s;
-  opacity: 0.6;
+  transition: .1s ease-in .1s;
+  opacity: .6;
   cursor: pointer;
 }
 

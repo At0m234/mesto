@@ -15,8 +15,6 @@ const popupImg = document.querySelector('.popup__big-img');
 const popupCaption = document.querySelector('.popup__caption');
 const popupBigImg = document.querySelector('#popup_img');
 
-const saveBtn = document.querySelector('.popup__save');
-
 
 // ДОБАВЛЕНИЕ КАРТОЧЕК НА СТРАНИЦУ 
 // СОЗДАЕМ МАССИВ С ОБЪЕКТАМИ КЛЮЧ-ЗНАЧЕНИЕ
@@ -151,8 +149,8 @@ function formSubmitHandlerEdit (evt) {
     let nameInput = document.querySelector('.popup__text_name');
     let jobInput = document.querySelector('.popup__text_profession');
     // Выберите элементы, куда должны быть вставлены значения полей
-    let profileTitle = document.querySelector('.profile__title');
-    let profileProfession = document.querySelector('.profile__profession');
+    const profileTitle = document.querySelector('.profile__title');
+    const profileProfession = document.querySelector('.profile__profession');
     // Отменяем стандартную отправку формы
     evt.preventDefault();       
     // Получите значение полей из свойства value
@@ -167,13 +165,13 @@ function formSubmitHandlerEdit (evt) {
 
 // ФУНКЦИЯ ОБРАБОТЧИКА ДЛЯ ОТПРАВКИ ФОРМЫ (ДОБАВЛЕНИЕ КАРТОЧКИ)
 function formSubmitHandlerAdd (evt) {
-    let titleInput = document.querySelector('#title');               // НАХОДИМ В ФОРМЕ ДОБАВЛЕНИЯ КАРТОЧКИ ПОЛЕ ВВОДА "НАЗВАНИЕ"
-    let placeInput = document.querySelector('#placeUrl');            // НАХОДИМ В ФОРМЕ ДОБАВЛЕНИЯ КАРТОЧКИ ПОЛЕ ВВОДА "ССЫЛКА НА КАРТИНКУ"
-    evt.preventDefault()                                             // ОТМЕНЯЕМ СТАНДАРТНУЮ ОТПРАВКУ ФОРМЫ
-    let newCard = {name: titleInput.value, link: placeInput.value};  // ФОРМИНУЕМ ШАБЛОН ОБЪЕКТА 
-    addCard(newCard);                                                // ВЫЗЫВАЕМ ФУНКЦИЮ ДОБАВЛЕНИЯ ЭЛЕМЕНТА В НАЧАЛО МАССИВА
-    createCard(newCard, false);                                      // ПЕРЕДАЕМ СФОРМИРОВАННЫЙ ЭЛЕМЕНТ МАССИВА ДЛЯ ОТОБРАЖЕНИЯ НА СТРАНИЦЕ
-    addPopupClosed();                                                // ВЫЗЫВАЕМ ФУНКЦИЮ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА
+    const titleInput = document.querySelector('#title');               // НАХОДИМ В ФОРМЕ ДОБАВЛЕНИЯ КАРТОЧКИ ПОЛЕ ВВОДА "НАЗВАНИЕ"
+    const placeInput = document.querySelector('#placeUrl');            // НАХОДИМ В ФОРМЕ ДОБАВЛЕНИЯ КАРТОЧКИ ПОЛЕ ВВОДА "ССЫЛКА НА КАРТИНКУ"
+    evt.preventDefault()                                               // ОТМЕНЯЕМ СТАНДАРТНУЮ ОТПРАВКУ ФОРМЫ
+    const newCard = {name: titleInput.value, link: placeInput.value};  // ФОРМИНУЕМ ШАБЛОН ОБЪЕКТА 
+    addCard(newCard);                                                  // ВЫЗЫВАЕМ ФУНКЦИЮ ДОБАВЛЕНИЯ ЭЛЕМЕНТА В НАЧАЛО МАССИВА
+    createCard(newCard, false);                                        // ПЕРЕДАЕМ СФОРМИРОВАННЫЙ ЭЛЕМЕНТ МАССИВА ДЛЯ ОТОБРАЖЕНИЯ НА СТРАНИЦЕ
+    addPopupClosed();                                                  // ВЫЗЫВАЕМ ФУНКЦИЮ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА
 }
 
 

@@ -12,6 +12,7 @@
         <header class="header">
             <img src="images/logo_mesto_white.svg" alt="Логотип" class="header__logo">
         </header>
+        <main class="content">
         <!-- ПРОФИЛЬ БЛОК 2 -->
         <section class="profile">
             <img src="images/jacques-yves_cousteau.jpg" alt="Жак-Ив Кусто" class="profile__image">
@@ -24,8 +25,8 @@
             </div>
             <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
         </section>
-         <!-- МЕСТА БЛОК 3 -->
-         <section class="places">
+        <!-- МЕСТА БЛОК 3 -->
+        <section class="places">
             <template id="place_template">
                 <div class="place">
                     <img src="images/trash.svg" alt="Удалить" class="place__trash">
@@ -37,7 +38,7 @@
                 </div>
             </template>
         </section>
-         <!-- EDIT POP-UP -->
+        <!-- EDIT POP-UP -->
         <section class="popup" id="popup_edit">
             <form name="popup" method="GET" action="#" class="popup__container" id="edit_container">
                 <h3 class="popup__title">Редактировать профиль</h3>
@@ -60,15 +61,16 @@
         <!-- IMG POP-UP -->
         <section class="popup" id="popup_img">
             <figure class="popup__img-container" id="img_container">
-              <button type="button" aria-label="Закрыть" class="popup__close-icon popup__close-icon_img" id="imgPopupClose"></button>
-              <img src="" alt="" class="popup__big-img">
-              <figcaption class="popup__caption"></figcaption>
+            <button type="button" aria-label="Закрыть" class="popup__close-icon popup__close-icon_img" id="imgPopupClose"></button>
+            <img src="" alt="" class="popup__big-img">
+            <figcaption class="popup__caption"></figcaption>
             </figure>
-          </section>
+        </section>
+        </main>
         <!-- ПОДВАЛ БЛОК 4 -->
         <footer class="footer">
             <nav class="footer__info">
-                <span class="footer__copyright">&copy; 2020 Mesto Russia</span>
+                <span class="footer__copyright">&copy; 2020 Ильин Владимир Олегович</span>
             </nav>
         </footer>
     </div>

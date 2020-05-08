@@ -14,7 +14,7 @@
 }
 
 .popup__save:hover {
-  transition: 0.1s linear 0.1s;
+  transition: .1s linear .1s;
   background-color: rgba(49, 49, 49, 0.8);
   cursor: pointer;
 }

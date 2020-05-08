@@ -1,5 +1,5 @@
-@import url("_name/popup__text_name.css");
-@import url("_profession/popup__text_profession.css");
+@import url(_name/popup__text_name.css);
+@import url(_profession/popup__text_profession.css);
 
 .popup__text {
   width: 83%;
@@ -9,5 +9,5 @@
   font-size: 14px;
   color: #000;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
 }

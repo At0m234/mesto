@@ -1,9 +1,9 @@
 .profile__add-btn {
   width: 17%;
   height: 50px;
-  border: 2px solid #FFF;
+  border: 2px solid #fff;
   background-color: #000;
-  background-image: url("../../../images/add_button.svg");
+  background-image: url(../../../images/add_button.svg);
   background-repeat: no-repeat;
   background-size: 60% 60%;
   background-position: center;
@@ -14,8 +14,8 @@
 }
 
 .profile__add-btn:hover {
-  transition: 0.1s linear 0.05s;
-  opacity: 0.6;
+  transition: .1s linear .05s;
+  opacity: .6;
   cursor: pointer;
 }
 

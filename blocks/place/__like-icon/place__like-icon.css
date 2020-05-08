@@ -1,30 +1,30 @@
-@import url("_filled/place__like-icon_filled.css");
+@import url(_filled/place__like-icon_filled.css);
 
 .place__like-icon {
   width: 21px;
   height: 19px;
   border: none;
-  background-color: #FFF;
+  background-color: #fff;
   align-self: center;
   margin-right: 22px;
   margin-left: auto;
-  background-image: url('../../../images/like-icon.svg');
+  background-image: url(../../../images/like-icon.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .place__like-icon:hover {
-  transition: 0.05s ease-in 0.01s;
-  opacity: 0.3;
+  transition: .05s ease-in .01s;
+  opacity: .3;
   cursor: pointer;
 }
 
 .place__like-icon_filled {
-  background-image: url('../../../images/like-icon black.svg');
+  background-image: url(../../../images/like-icon-black.svg);
 }
 
 .place__like-icon_filled:hover {
-  transition: 0.05s ease-in 0.01s;
-  opacity: 0.3;
+  transition: .05s ease-in .01s;
+  opacity: .3;
   cursor: pointer;
 }
