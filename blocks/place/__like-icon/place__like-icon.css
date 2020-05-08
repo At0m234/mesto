@@ -8,7 +8,7 @@
   align-self: center;
   margin-right: 22px;
   margin-left: auto;
-  background-image: url(../../../images/Like_icon.svg);
+  background-image: url(../../../images/Likeicon.svg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -20,7 +20,7 @@
 }
 
 .place__like-icon_filled {
-  background-image: url(../../../images/Black_like.svg);
+  background-image: url(../../../images/Blacklike.svg);
 }
 
 .place__like-icon_filled:hover {
