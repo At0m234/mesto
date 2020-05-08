@@ -21,15 +21,15 @@ const popupBigImg = document.querySelector('#popup_img');
 const initialCards = [
     {
         name: 'архыз',
-        link: 'images/Arkhyz.jpg'
+        link: 'images/arkhyz.jpg'
     },
     {
         name: 'байкал',
-        link: 'images/Baikal.jpg'
+        link: 'images/baikal.jpg'
     },
     {
         name: 'камчатка',
-        link: 'images/Kamchatka.jpg'
+        link: 'images/kamchatka.jpg'
     },
     {
         name: 'сьерра невада',
