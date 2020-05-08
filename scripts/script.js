@@ -21,27 +21,27 @@ const popupBigImg = document.querySelector('#popup_img');
 const initialCards = [
     {
         name: 'архыз',
-        link: 'images/arkhyz.jpg'
+        link: 'images/Arkhyz.jpg'
     },
     {
         name: 'байкал',
-        link: 'images/baikal.jpg'
+        link: 'images/Baikal.jpg'
     },
     {
         name: 'камчатка',
-        link: 'images/kamchatka.jpg'
+        link: 'images/Kamchatka.jpg'
     },
     {
         name: 'сьерра невада',
-        link: 'images/yosemiteValley.jpg'
+        link: 'images/Yosemite Valley.jpg'
     },
     {
         name: 'лаго ди брайес',
-        link: 'images/lagoDiBraies.jpg'
+        link: 'images/Lago Di Braies.jpg'
     },
     {
         name: 'ко чанг',
-        link: 'images/koHong.jpg'
+        link: 'images/Ko Hong.jpg'
     }
 ];
 
