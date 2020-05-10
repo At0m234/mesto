@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <title>MESTO Russia</title>
-    <link rel="stylesheet" href="pages/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  <title>MESTO Russia</title>
+  <link rel="stylesheet" href="pages/index.css">
 </head>
 <body>
-    <div class="page">
-        <!-- ШАПКА САЙТА БЛОК 1 -->
-        <header class="header">
-            <img src="images/logo_mesto_white.svg" alt="Логотип" class="header__logo">
-        </header>
-        <main class="content">
-        <!-- ПРОФИЛЬ БЛОК 2 -->
-        <section class="profile">
-            <img src="images/Jacques Yves Cousteau.jpg" alt="Жак-Ив Кусто" class="profile__image">
-            <div class="profile__container">
-                <div class="profile__button-wrapper">
-                    <h1 class="profile__title">жак-ив кусто</h1>
-                    <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
-                </div>
-                <p class="profile__profession">Исследователь океана</p>
-            </div>
-            <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
-        </section>
-        <!-- МЕСТА БЛОК 3 -->
-        <section class="places">
-            <template id="place_template">
-                <div class="place">
-                    <img src="images/trash.svg" alt="Удалить" class="place__trash">
-                    <img src="" alt="" class="place__image">
-                    <div class="place__info">
-                        <h2 class="place__name"></h2>
-                        <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-                    </div>
-                </div>
-            </template>
-        </section>
-        <!-- EDIT POP-UP -->
-        <section class="popup" id="popup_edit">
-            <form name="popup" method="GET" action="#" class="popup__container" id="edit_container">
-                <h3 class="popup__title">Редактировать профиль</h3>
-                <button type="button" aria-label="Закрыть" class="popup__close-icon"></button>
-                <input type="text" name="name" required placeholder="Имя" id="name" class="popup__text popup__text_name"> 
-                <input type="text" name="profession" required placeholder="О себе" id="profession" class="popup__text popup__text_profession">
-                <button type="submit" class="popup__save">Сохранить</button>
-            </form>
-        </section>
-        <!-- ADD POP-UP -->
-        <section class="popup" id="popup_add">
-            <form name="popup" method="GET" action="#" class="popup__container" id="add_container">
-                <h3 class="popup__title">Новое место</h3>
-                <button type="button" aria-label="Закрыть" class="popup__close-icon" id="addPopupClose"></button>
-                <input type="text" name="title" required placeholder="Название" id="title" class="popup__text popup__text_name"> 
-                <input type="text" name="place_url" required placeholder="Ссылка на картинку" id="placeUrl" class="popup__text popup__text_profession">
-                <button type="submit" class="popup__save">Создать</button>
-            </form>
-        </section>
-        <!-- IMG POP-UP -->
-        <section class="popup" id="popup_img">
-            <figure class="popup__img-container" id="img_container">
-            <button type="button" aria-label="Закрыть" class="popup__close-icon popup__close-icon_img" id="imgPopupClose"></button>
-            <img src="" alt="" class="popup__big-img">
-            <figcaption class="popup__caption"></figcaption>
-            </figure>
-        </section>
-        </main>
-        <!-- ПОДВАЛ БЛОК 4 -->
-        <footer class="footer">
-            <nav class="footer__info">
-                <span class="footer__copyright">&copy; 2020 Ильин Владимир Олегович</span>
-            </nav>
-        </footer>
-    </div>
-    <script src="scripts/script.js"></script>
+  <div class="page">
+    <!-- ШАПКА САЙТА БЛОК 1 -->
+    <header class="header">
+      <img src="images/logo_mesto_white.svg" alt="Логотип" class="header__logo">
+    </header>
+    <main class="content">
+    <!-- ПРОФИЛЬ БЛОК 2 -->
+    <section class="profile">
+      <img src="images/Jacques Yves Cousteau.jpg" alt="Жак-Ив Кусто" class="profile__image">
+      <div class="profile__container">
+      <div class="profile__button-wrapper">
+        <h1 class="profile__title">жак-ив кусто</h1>
+        <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
+      </div>
+        <p class="profile__profession">Исследователь океана</p>
+      </div>
+      <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
+    </section>
+    <!-- МЕСТА БЛОК 3 -->
+    <section class="places">
+      <template id="place_template">
+        <div class="place">
+          <img src="images/trash.svg" alt="Удалить" class="place__trash">
+          <img src="" alt="" class="place__image">
+          <div class="place__info">
+            <h2 class="place__name"></h2>
+            <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
+          </div>
+        </div>
+      </template>
+    </section>
+    <!-- EDIT POP-UP -->
+    <section class="popup" id="popup_edit">
+      <form name="popup" method="GET" action="#" class="popup__container" id="edit_container">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <button type="button" aria-label="Закрыть" class="popup__close-icon"></button>
+        <input type="text" name="name" required placeholder="Имя" id="name" class="popup__text popup__text_name">
+        <input type="text" name="profession" required placeholder="О себе" id="profession" class="popup__text popup__text_profession">
+        <button type="submit" class="popup__save">Сохранить</button>
+      </form>
+    </section>
+    <!-- ADD POP-UP -->
+    <section class="popup" id="popup_add">
+      <form name="popup" method="GET" action="#" class="popup__container" id="add_container">
+        <h3 class="popup__title">Новое место</h3>
+        <button type="button" aria-label="Закрыть" class="popup__close-icon" id="addPopupClose"></button>
+        <input type="text" name="title" required placeholder="Название" id="title" class="popup__text popup__text_name">
+        <input type="text" name="place_url" required placeholder="Ссылка на картинку" id="placeUrl" class="popup__text popup__text_profession">
+        <button type="submit" class="popup__save">Создать</button>
+      </form>
+    </section>
+    <!-- IMG POP-UP -->
+    <section class="popup" id="popup_img">
+      <figure class="popup__img-container" id="img_container">
+        <button type="button" aria-label="Закрыть" class="popup__close-icon popup__close-icon_img" id="imgPopupClose"></button>
+        <img src="" alt="" class="popup__big-img">
+        <figcaption class="popup__caption"></figcaption>
+      </figure>
+    </section>
+    </main>
+    <!-- ПОДВАЛ БЛОК 4 -->
+    <footer class="footer">
+      <nav class="footer__info">
+        <span class="footer__copyright">&copy; 2020 Ильин Владимир Олегович</span>
+      </nav>
+    </footer>
+  </div>
+  <script src="scripts/script.js"></script>
 </body>
 </html>
+
