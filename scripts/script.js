@@ -122,9 +122,23 @@ function bigImagePopupOpened(evt) {
   popupImg.alt = evt.target.alt;
   popupCaption.textContent = evt.target.alt;
 }
+
 // ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА БОЛЬШОГО ИЗОБРАЖЕНИЯ
 function bigImagePopupClosed(evt) {
   popupBigImg.classList.remove("popup_opened");
+}
+
+//ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
+function closePopupsOnWindowClick(evt) {
+  if (evt.target == popupEdit) {
+    editPopupClosed();
+  }
+  else if (evt.target == popupAdd) {
+    addPopupClosed();
+  }
+  else if (evt.target == popupBigImg) {
+    bigImagePopupClosed();
+  }
 }
 
 // ФУНКЦИЯ УДАЛЕНИЯ КАРТИНКИ ИЗ СЕКЦИИ
@@ -180,3 +194,4 @@ editBtn.addEventListener("click", editPopupOpened); // СЛУШАТЕЛЬ НА �
 editCloseBtn.addEventListener("click", editPopupClosed); // СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 addBtn.addEventListener("click", addPopupOpened); // СЛУШАТЕЛЬ НА ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
 addCloseBtn.addEventListener("click", addPopupClosed); // СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
+window.addEventListener('click', closePopupsOnWindowClick);//СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
