@@ -129,14 +129,14 @@ function bigImagePopupClosed(evt) {
 }
 
 //ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
-function closePopupsOnWindowClick(evt) {
-  if (evt.target == popupEdit) {
+function closePopups(evt) {
+  if (evt.target == popupEdit || evt.key === "Escape") {
     editPopupClosed();
   }
-  else if (evt.target == popupAdd) {
+  if (evt.target == popupAdd || evt.key === "Escape") {
     addPopupClosed();
   }
-  else if (evt.target == popupBigImg) {
+  if (evt.target == popupBigImg || evt.key === "Escape") {
     bigImagePopupClosed();
   }
 }
@@ -189,9 +189,10 @@ function formSubmitHandlerAdd(evt) {
 
 // СЛУШАТЕЛИ СОБЫТИЙ
 editPopupContainer.addEventListener("submit", formSubmitHandlerEdit); // СЛУШАТЕЛЬ ФОРМЫ РЕДАКТИРОВАНИЯ
-addPopupContainer.addEventListener("submit", formSubmitHandlerAdd); // СЛУШАТЕЛЬ ФОРМЫ ДОБАВЛЕНИЯ КАРТОЧКИ
 editBtn.addEventListener("click", editPopupOpened); // СЛУШАТЕЛЬ НА ОТКРЫТИЕ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 editCloseBtn.addEventListener("click", editPopupClosed); // СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
+addPopupContainer.addEventListener("submit", formSubmitHandlerAdd); // СЛУШАТЕЛЬ ФОРМЫ ДОБАВЛЕНИЯ КАРТОЧКИ
 addBtn.addEventListener("click", addPopupOpened); // СЛУШАТЕЛЬ НА ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
 addCloseBtn.addEventListener("click", addPopupClosed); // СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
-window.addEventListener('click', closePopupsOnWindowClick);//СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
+window.addEventListener('click', closePopups);//СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
+window.addEventListener('keydown', closePopups);//СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПРИ НАЖАТИИ КЛАВИШИ ESCAPE
