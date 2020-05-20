@@ -111,8 +111,6 @@ function addPopupOpened() {
 // ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
 function addPopupClosed() {
   popupAdd.classList.remove("popup_opened");
-  addTitleInput.value = "";
-  addPlaceInput.value = "";
 }
 
 // ФУНКЦИЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА БОЛЬШОГО ИЗОБРАЖЕНИЯ
@@ -185,6 +183,8 @@ function formSubmitHandlerAdd(evt) {
   addCard(newCard); // ВЫЗЫВАЕМ ФУНКЦИЮ ДОБАВЛЕНИЯ ЭЛЕМЕНТА В НАЧАЛО МАССИВА
   createCard(newCard, false); // ПЕРЕДАЕМ СФОРМИРОВАННЫЙ ЭЛЕМЕНТ МАССИВА ДЛЯ ОТОБРАЖЕНИЯ НА СТРАНИЦЕ
   addPopupClosed(); // ВЫЗЫВАЕМ ФУНКЦИЮ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА
+  setSubmitButtonState(false); //ПОСЛЕ ДОБАВЛЕНИЯ КАРТОЧКИ КНОПКА "СОЗДАТЬ" СТАНОВИТСЯ НЕВАЛИДНОЙ
+  formAdd.reset(); //СБРАСЫВАЕМ ЗНАЧЕНИЯ, ВВЕДЕННЫЕ В "ИНПУТЫ"
 }
 
 // СЛУШАТЕЛИ СОБЫТИЙ

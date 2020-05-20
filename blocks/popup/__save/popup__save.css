@@ -18,3 +18,9 @@
   background-color: rgba(49, 49, 49, 0.8);
   cursor: pointer;
 }
+
+.popup__save_disabled {
+  background-color: #fff;
+  color: #c5c5c5;
+  border: 1px solid #c5c5c5;
+}
