@@ -92,12 +92,8 @@ function createCard(item, addToEnd) {
 // ФУНКЦИЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 function editPopupOpened() {
   popupEdit.classList.add("popup_opened");
-  document.querySelector(".popup__text_name").value = document.querySelector(
-    ".profile__title"
-  ).textContent;
-  document.querySelector(
-    ".popup__text_profession"
-  ).value = document.querySelector(".profile__profession").textContent;
+  document.querySelector(".popup__text_name").value = document.querySelector(".profile__title").textContent;
+  document.querySelector(".popup__text_profession").value = document.querySelector(".profile__profession").textContent;
 }
 // ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
 function editPopupClosed() {
@@ -138,6 +134,7 @@ function closePopups(evt) {
     bigImagePopupClosed();
   }
 }
+
 
 // ФУНКЦИЯ УДАЛЕНИЯ КАРТИНКИ ИЗ СЕКЦИИ
 function delCard(evt) {
