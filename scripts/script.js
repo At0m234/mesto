@@ -1,4 +1,9 @@
 // ОБЪЯВЛЕНИЕ ПЕРЕМЕННЫХ - ПОИСК И ДОБАВЛЕНИЕ В DOM
+const nameInput = document.querySelector(".popup__text_name");
+const jobInput = document.querySelector(".popup__text_profession");
+const profileTitle = document.querySelector(".profile__title");
+const profileProfession = document.querySelector(".profile__profession");
+
 const popupEdit = document.querySelector("#popup_edit");
 const editBtn = document.querySelector(".profile__edit-btn");
 const editCloseBtn = document.querySelector(".popup__close-icon");
@@ -14,9 +19,16 @@ const addPlaceInput = document.querySelector("#placeUrl");
 const popupImg = document.querySelector(".popup__big-img");
 const popupCaption = document.querySelector(".popup__caption");
 const popupBigImg = document.querySelector("#popup_img");
+const imgCloseBtn = document.querySelector('#imgPopupClose')
 
-// ДОБАВЛЕНИЕ КАРТОЧЕК НА СТРАНИЦУ
-// СОЗДАЕМ МАССИВ С ОБЪЕКТАМИ КЛЮЧ-ЗНАЧЕНИЕ
+const places = document.querySelector(".places");
+const place = places.querySelector("#place_template").content;
+
+const inputsListFormEdit = Array.from(popupEdit.querySelectorAll('.popup__text'));
+const inputsListFormAdd = Array.from(popupAdd.querySelectorAll('.popup__text'));
+
+
+// Массив с объектами ключ-значение
 const initialCards = [
   {
     name: "архыз",
@@ -44,22 +56,8 @@ const initialCards = [
   },
 ];
 
-// Находим в DOM и записываем в переменные секцию places и контент внутри блока template
-const places = document.querySelector(".places");
-const place = places.querySelector("#place_template").content;
 
-// Создаем функцию, которая будет пробегать по каждому элементу массива
-function render() {
-  places.innerHTML = "";
-  initialCards.forEach(function (item) {
-    createCard(item, true);
-  });
-}
-
-// Вызываем функцию обработки элементов массива
-render();
-
-// Создаем функцию, которая будет клонировать переменную place со всем содержимым и записываем клон в переменную placeElement
+// Функция, которая будет клонировать переменную place со всем содержимым, и записываем клон в переменную placeElement
 // далее находим и добавляем в DOM содержимое placeElement и присваем ему соответствующие элементы массива initialCards
 function createCard(item, addToEnd) {
   const placeElement = place.cloneNode(true);
@@ -79,9 +77,6 @@ function createCard(item, addToEnd) {
 
   placeImage.addEventListener("click", bigImagePopupOpened);
 
-  const bigImgCloseBtn = document.querySelector("#imgPopupClose");
-  bigImgCloseBtn.addEventListener("click", bigImagePopupClosed);
-
   if (addToEnd) {
     places.append(placeElement);
   } else {
@@ -89,107 +84,133 @@ function createCard(item, addToEnd) {
   }
 }
 
-// ФУНКЦИЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-function editPopupOpened() {
-  popupEdit.classList.add("popup_opened");
-  document.querySelector(".popup__text_name").value = document.querySelector(".profile__title").textContent;
-  document.querySelector(".popup__text_profession").value = document.querySelector(".profile__profession").textContent;
+
+// Создаем функцию, которая будет пробегать по каждому элементу массива
+function render() {
+  places.innerHTML = "";
+  initialCards.forEach(function (item) {
+    createCard(item, true);
+  });
 }
-// ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-function editPopupClosed() {
-  popupEdit.classList.remove("popup_opened");
+// Вызываем функцию обработки элементов массива
+render();
+
+// Функция отображения информация из профиля в форме редактирования профиля
+function editPopupInfo() {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileProfession.textContent;
+};
+
+
+// Функция проверки валидности перед открытием попапа
+function hidePrevErrors(formElement, inputsList, obj) {
+  inputsList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, obj);
+  });
 }
 
-// ФУНКЦИЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
-function addPopupOpened() {
-  popupAdd.classList.add("popup_opened");
-}
-// ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
-function addPopupClosed() {
-  popupAdd.classList.remove("popup_opened");
-}
 
-// ФУНКЦИЯ ОТКРЫТИЯ МОДАЛЬНОГО ОКНА БОЛЬШОГО ИЗОБРАЖЕНИЯ
+// Функция отображения попапов
+function popupVisibility(popup) {
+  if(popup === popupEdit && !popup.classList.contains("popup_opened")) {
+    editPopupInfo();
+    hidePrevErrors(formEdit, inputsListFormEdit, configObj);
+    toggleButtonState(inputsListFormEdit, editSave, configObj);
+  }
+  else if (popup === popupAdd && !popup.classList.contains("popup_opened")){
+  formAdd.reset();
+    hidePrevErrors(formAdd, inputsListFormAdd, configObj);
+    toggleButtonState(inputsListFormAdd, addCreate, configObj);
+  }
+  popup.classList.toggle("popup_opened");
+  //Слушатель на закрытие модальных окон при нажатии ESCAPE
+  window.addEventListener('keydown', closePopups);
+  //Слушатель на закрытие модальных окон по клику на оверлай
+  window.addEventListener('click', closePopups);
+};
+
+
+// Функция открытия модального окна большого изображения
 function bigImagePopupOpened(evt) {
-  popupBigImg.classList.add("popup_opened");
   popupImg.src = evt.target.src;
   popupImg.alt = evt.target.alt;
   popupCaption.textContent = evt.target.alt;
+  popupVisibility(popupBigImg);
 }
 
-// ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА БОЛЬШОГО ИЗОБРАЖЕНИЯ
-function bigImagePopupClosed(evt) {
-  popupBigImg.classList.remove("popup_opened");
-}
 
-//ФУНКЦИЯ ЗАКРЫТИЯ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
+//Функция закрытия модальных окон по клику на оверлай
 function closePopups(evt) {
-  if (evt.target == popupEdit || evt.key === "Escape") {
-    editPopupClosed();
+  if (evt.target === popupEdit || (evt.key === "Escape" && popupEdit.classList.contains("popup_opened"))) {
+    popupVisibility(popupEdit)
   }
-  if (evt.target == popupAdd || evt.key === "Escape") {
-    addPopupClosed();
+  else if (evt.target === popupAdd || (evt.key === "Escape" && popupAdd.classList.contains("popup_opened"))) {
+    popupVisibility(popupAdd)
   }
-  if (evt.target == popupBigImg || evt.key === "Escape") {
-    bigImagePopupClosed();
+  else if (evt.target === popupBigImg || (evt.key === "Escape" && popupBigImg.classList.contains("popup_opened"))) {
+    popupVisibility(popupBigImg);
   }
 }
 
 
-// ФУНКЦИЯ УДАЛЕНИЯ КАРТИНКИ ИЗ СЕКЦИИ
+// Функция удаления карточки из секции
 function delCard(evt) {
   evt.target.parentElement.remove();
 }
 
-// ФУНКЦИЯ ЛАЙКА КАРТОЧКИ
+// Функция проставления лайка
 function like(evt) {
   evt.target.classList.toggle("place__like-icon_filled");
 }
 
-// ФУНКЦИЯ ДОБАВЛЕНИЯ КАРТОЧКИ В НАЧАЛО МАССИВА
+// Функция добавления карточки в начало массива
 function addCard(card) {
   initialCards.unshift(card);
 }
 
-// ФУНКЦИЯ ОБРАБОТЧИКА ДЛЯ ОТПРАВКИ ФОРМЫ (РЕДАКТИРОВАНИЕ ПРОФИЛЯ)
+
+// Функция обработчика для отправки формы (РЕДАКТИРОВАНИЕ ПРОФИЛЯ)
 function formSubmitHandlerEdit(evt) {
-  // Находим поля формы в DOM
-  let nameInput = document.querySelector(".popup__text_name");
-  let jobInput = document.querySelector(".popup__text_profession");
-  // Выберите элементы, куда должны быть вставлены значения полей
-  const profileTitle = document.querySelector(".profile__title");
-  const profileProfession = document.querySelector(".profile__profession");
   // Отменяем стандартную отправку формы
   evt.preventDefault();
-  // Получите значение полей из свойства value
-  nameInput = nameInput.value;
-  jobInput = jobInput.value;
-  // Вставьте новые значения с помощью textContent
-  profileTitle.textContent = nameInput;
-  profileProfession.textContent = jobInput;
+  // Вставляем новые значения с помощью textContent
+  profileTitle.textContent = nameInput.value;
+  profileProfession.textContent = jobInput.value;
   // Вызываем функцию закрытия модального окна
-  editPopupClosed();
+  popupVisibility(popupEdit)
 }
 
-// ФУНКЦИЯ ОБРАБОТЧИКА ДЛЯ ОТПРАВКИ ФОРМЫ (ДОБАВЛЕНИЕ КАРТОЧКИ)
+
+// Функция обработчика для отправки формы (ДОБАВЛЕНИЕ КАРТОЧКИ)
 function formSubmitHandlerAdd(evt) {
-  const titleInput = document.querySelector("#title"); // НАХОДИМ В ФОРМЕ ДОБАВЛЕНИЯ КАРТОЧКИ ПОЛЕ ВВОДА "НАЗВАНИЕ"
-  const placeInput = document.querySelector("#placeUrl"); // НАХОДИМ В ФОРМЕ ДОБАВЛЕНИЯ КАРТОЧКИ ПОЛЕ ВВОДА "ССЫЛКА НА КАРТИНКУ"
-  evt.preventDefault(); // ОТМЕНЯЕМ СТАНДАРТНУЮ ОТПРАВКУ ФОРМЫ
-  const newCard = { name: titleInput.value, link: placeInput.value }; // ФОРМИНУЕМ ШАБЛОН ОБЪЕКТА
-  addCard(newCard); // ВЫЗЫВАЕМ ФУНКЦИЮ ДОБАВЛЕНИЯ ЭЛЕМЕНТА В НАЧАЛО МАССИВА
-  createCard(newCard, false); // ПЕРЕДАЕМ СФОРМИРОВАННЫЙ ЭЛЕМЕНТ МАССИВА ДЛЯ ОТОБРАЖЕНИЯ НА СТРАНИЦЕ
-  addPopupClosed(); // ВЫЗЫВАЕМ ФУНКЦИЮ ЗАКРЫТИЯ МОДАЛЬНОГО ОКНА
-  setSubmitButtonState(false); //ПОСЛЕ ДОБАВЛЕНИЯ КАРТОЧКИ КНОПКА "СОЗДАТЬ" СТАНОВИТСЯ НЕВАЛИДНОЙ
-  formAdd.reset(); //СБРАСЫВАЕМ ЗНАЧЕНИЯ, ВВЕДЕННЫЕ В "ИНПУТЫ"
+  // Отменяем стандартную отправку формы
+  evt.preventDefault();
+  // Формируем шаблон объекта
+  const newCard = { name: addTitleInput.value, link: addPlaceInput.value };
+  // Вызываем функцию добавления карточки в начало массива
+  addCard(newCard);
+  // Передаем сформированную карточку для отображения на странице
+  createCard(newCard, false);
+  // Вызываем функцию закрытия модального окна
+  popupVisibility(popupAdd);
+  //Очищаем форму
+  formAdd.reset();
 }
 
 // СЛУШАТЕЛИ СОБЫТИЙ
-editPopupContainer.addEventListener("submit", formSubmitHandlerEdit); // СЛУШАТЕЛЬ ФОРМЫ РЕДАКТИРОВАНИЯ
-editBtn.addEventListener("click", editPopupOpened); // СЛУШАТЕЛЬ НА ОТКРЫТИЕ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-editCloseBtn.addEventListener("click", editPopupClosed); // СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА РЕДАКТИРОВАНИЯ ПРОФИЛЯ
-addPopupContainer.addEventListener("submit", formSubmitHandlerAdd); // СЛУШАТЕЛЬ ФОРМЫ ДОБАВЛЕНИЯ КАРТОЧКИ
-addBtn.addEventListener("click", addPopupOpened); // СЛУШАТЕЛЬ НА ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
-addCloseBtn.addEventListener("click", addPopupClosed); // СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА ДОБАВЛЕНИЯ КАРТОЧКИ
-window.addEventListener('click', closePopups);//СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПО КЛИКУ НА ОВЕРЛАЙ
-window.addEventListener('keydown', closePopups);//СЛУШАТЕЛЬ НА ЗАКРЫТИЕ МОДАЛЬНЫХ ОКОН ПРИ НАЖАТИИ КЛАВИШИ ESCAPE
+// Слушатель отправки формы редактирования профиля
+editPopupContainer.addEventListener("submit", formSubmitHandlerEdit);
+// Слушатель на открытие модального окна редактирования профиля
+editBtn.addEventListener("click", () => popupVisibility(popupEdit));
+// Слушатель на закрытие модального окна редактирования профиля
+editCloseBtn.addEventListener("click",() => popupVisibility(popupEdit));
+
+// Слушатель отправки формы добавления карточки
+addPopupContainer.addEventListener("submit", formSubmitHandlerAdd);
+// Слушатель на открытие модального окна добавления карточки
+addBtn.addEventListener("click", () => popupVisibility(popupAdd));
+// Слушатель на закрытие модального окна добавления карточки
+addCloseBtn.addEventListener("click", () => popupVisibility(popupAdd));
+
+// Слушатель на закрытие модального окна большого изображения
+imgCloseBtn.addEventListener('click', () => popupVisibility(popupBigImg));
