@@ -72,33 +72,43 @@ function hidePrevErrors(formElement, inputElements, obj) {
 }
 
 
-function popupPreInit(formElement, inputElements, buttonElement, obj) {
-	hidePrevErrors(formElement, inputElements, obj);
-  toggleButtonState(inputElements, buttonElement, obj);
+function popupPreInit(formElement, obj) {
+  const formInputs = formElement.querySelectorAll(configObj.inputSelector)
+  const formBtn = formElement.querySelector(configObj.submitButtonSelector)
+  editPopupInfo();
+	hidePrevErrors(formElement, formInputs, obj);
+  toggleButtonState(formInputs, formBtn , obj);
+  formAdd.reset();
 }
 
 
 // Функция отображения попапов
 function popupVisibility(popup) {
-  if (!popup.classList.contains("popup_opened")) {
+  toggleEventListeners(popup);
 	if(popup === popupEdit) {
-		editPopupInfo();
-		popupPreInit(formEdit, inputElementsFormEdit, editSave, configObj);
+		popupPreInit(formEdit, configObj);
   }
   else if (popup === popupAdd) {
-		formAdd.reset();
-		popupPreInit(formAdd, inputElementsFormAdd, addCreate, configObj);
-  }
-  //Слушатель на закрытие модальных окон при нажатии ESCAPE
-  window.addEventListener('keydown', togglePopup);
-  //Слушатель на закрытие модальных окон по клику на оверлай
-  window.addEventListener('click', togglePopup);
-  } else {
-	window.removeEventListener('keydown', togglePopup);
-	window.removeEventListener('click', togglePopup);
+		popupPreInit(formAdd,  configObj);
   }
   popup.classList.toggle("popup_opened");
 };
+
+
+// Функция устанавки / снятия слушатели Esc и Overlay
+function toggleEventListeners (popup) {
+  if (!popup.classList.contains('popup_opened')) {
+    // Устанавливаем слушатель закрытия формы кликом на оверлей
+    window.addEventListener('click', togglePopup);
+    // Устанавливаем слушатель клавиатуры
+    window.addEventListener('keydown', togglePopup);
+  } else {
+    // Снятие слушателя закрытия формы кликом на оверлей
+    window.removeEventListener('click', togglePopup);
+    // Снятие слушателя клавиатуры
+    window.removeEventListener('keydown', togglePopup);
+  }
+}
 
 
 //Функция смены отображения модальных окон по клику на оверлай
@@ -120,7 +130,7 @@ function bigImagePopupOpened(evt) {
 
 
 // Функция удаления карточки из секции
-function delCard(evt) {
+function removeCard(evt) {
   evt.target.parentElement.remove();
 }
 
@@ -144,7 +154,7 @@ function createCard(item, addToEnd) {
   placeName.textContent = item.name;
 
   const delBtn = placeElement.querySelector(".place__trash");
-  delBtn.addEventListener("click", delCard);
+  delBtn.addEventListener("click", removeCard);
 
   const likeBtn = placeElement.querySelector(".place__like-icon");
   likeBtn.addEventListener("click", like);

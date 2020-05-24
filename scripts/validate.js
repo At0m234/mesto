@@ -27,11 +27,11 @@ const checkInputValidity = (formElement, inputElement, obj) => {
 // Функция, обходящая массив полей для проверки их валидности
 const hasInvalidInput = (inputElements) => {
   // проходим по массиву методом some
-  return inputElements.some((inputElement) => {
-    // Если поле не валидно, колбэк вернёт true
-    // Обход массива прекратится и вся фунцкция
-    // hasInvalidInput вернёт true
-    return !inputElement.validity.valid;
+  return Array.prototype.slice.call(inputElements).some((inputElement) => {
+  // Если поле не валидно, колбэк вернёт true
+  // Обход массива прекратится и вся фунцкция
+  // hasInvalidInput вернёт true
+  return !inputElement.validity.valid;
   })
 };
 

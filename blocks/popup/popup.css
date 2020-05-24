@@ -3,7 +3,6 @@
 @import url(__save/popup__save.css);
 @import url(__title/popup__title.css);
 @import url(__close-icon/popup__close-icon.css);
-@import url(_opened/popup_opened.css);
 @import url(__img-container/popup__img-container.css);
 @import url(__big-img/popup__big-img.css);
 @import url(__caption/popup__caption.css);
@@ -11,6 +10,7 @@
 
 .popup {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -18,21 +18,14 @@
   box-shadow: 0px 0px 25px rgba(0, 0, 0, .15);
   top: 0;
   left: 0;
+  margin: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
   visibility: hidden;
   opacity: 0;
   transition: visibility .5s, opacity .5s ease-in-out;
-}
-
-/* Если удалить отсюда модификатор блока, то функция открытия попап не срабатывает, display: none; не меняется на display:flex;.
-Единственный выход из ситуации, который я нашел - создать дополнительный класс popup_closed и display:none пенести в него, тогда функция открытия срабатывает,
-а из стилей .popup вообще удалить свойство display */
-
-.popup_opened {
-  display: flex;
-  visibility: visible;
-  opacity: 1;
 }
