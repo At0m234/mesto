@@ -24,8 +24,8 @@ const imgCloseBtn = document.querySelector('#imgPopupClose')
 const places = document.querySelector(".places");
 const place = places.querySelector("#place_template").content;
 
-const inputsListFormEdit = Array.from(popupEdit.querySelectorAll('.popup__text'));
-const inputsListFormAdd = Array.from(popupAdd.querySelectorAll('.popup__text'));
+const inputElementsFormEdit = Array.from(popupEdit.querySelectorAll('.popup__text'));
+const inputElementsFormAdd = Array.from(popupAdd.querySelectorAll('.popup__text'));
 
 
 // Массив с объектами ключ-значение
@@ -55,6 +55,80 @@ const initialCards = [
     link: "images/Ko Hong.jpg",
   },
 ];
+
+
+// Функция отображения информация из профиля в форме редактирования профиля
+function editPopupInfo() {
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileProfession.textContent;
+};
+
+
+// Функция проверки валидности перед открытием попапа
+function hidePrevErrors(formElement, inputElements, obj) {
+  inputElements.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement, obj);
+  });
+}
+
+
+function popupPreInit(formElement, inputElements, buttonElement, obj) {
+	hidePrevErrors(formElement, inputElements, obj);
+  toggleButtonState(inputElements, buttonElement, obj);
+}
+
+
+// Функция отображения попапов
+function popupVisibility(popup) {
+  if (!popup.classList.contains("popup_opened")) {
+	if(popup === popupEdit) {
+		editPopupInfo();
+		popupPreInit(formEdit, inputElementsFormEdit, editSave, configObj);
+  }
+  else if (popup === popupAdd) {
+		formAdd.reset();
+		popupPreInit(formAdd, inputElementsFormAdd, addCreate, configObj);
+  }
+  //Слушатель на закрытие модальных окон при нажатии ESCAPE
+  window.addEventListener('keydown', togglePopup);
+  //Слушатель на закрытие модальных окон по клику на оверлай
+  window.addEventListener('click', togglePopup);
+  } else {
+	window.removeEventListener('keydown', togglePopup);
+	window.removeEventListener('click', togglePopup);
+  }
+  popup.classList.toggle("popup_opened");
+};
+
+
+//Функция смены отображения модальных окон по клику на оверлай
+function togglePopup(evt) {
+	const openedPopup = document.querySelector(".popup_opened");
+	if (openedPopup !== null && (evt.target === openedPopup || (evt.key === "Escape"))) {
+	popupVisibility(openedPopup);
+	}
+}
+
+
+// Функция открытия модального окна большого изображения
+function bigImagePopupOpened(evt) {
+  popupImg.src = evt.target.src;
+  popupImg.alt = evt.target.alt;
+  popupCaption.textContent = evt.target.alt;
+  popupVisibility(popupBigImg);
+}
+
+
+// Функция удаления карточки из секции
+function delCard(evt) {
+  evt.target.parentElement.remove();
+}
+
+
+// Функция проставления лайка
+function like(evt) {
+  evt.target.classList.toggle("place__like-icon_filled");
+}
 
 
 // Функция, которая будет клонировать переменную place со всем содержимым, и записываем клон в переменную placeElement
@@ -95,73 +169,6 @@ function render() {
 // Вызываем функцию обработки элементов массива
 render();
 
-// Функция отображения информация из профиля в форме редактирования профиля
-function editPopupInfo() {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileProfession.textContent;
-};
-
-
-// Функция проверки валидности перед открытием попапа
-function hidePrevErrors(formElement, inputsList, obj) {
-  inputsList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, obj);
-  });
-}
-
-
-// Функция отображения попапов
-function popupVisibility(popup) {
-  if(popup === popupEdit && !popup.classList.contains("popup_opened")) {
-    editPopupInfo();
-    hidePrevErrors(formEdit, inputsListFormEdit, configObj);
-    toggleButtonState(inputsListFormEdit, editSave, configObj);
-  }
-  else if (popup === popupAdd && !popup.classList.contains("popup_opened")){
-  formAdd.reset();
-    hidePrevErrors(formAdd, inputsListFormAdd, configObj);
-    toggleButtonState(inputsListFormAdd, addCreate, configObj);
-  }
-  popup.classList.toggle("popup_opened");
-  //Слушатель на закрытие модальных окон при нажатии ESCAPE
-  window.addEventListener('keydown', closePopups);
-  //Слушатель на закрытие модальных окон по клику на оверлай
-  window.addEventListener('click', closePopups);
-};
-
-
-// Функция открытия модального окна большого изображения
-function bigImagePopupOpened(evt) {
-  popupImg.src = evt.target.src;
-  popupImg.alt = evt.target.alt;
-  popupCaption.textContent = evt.target.alt;
-  popupVisibility(popupBigImg);
-}
-
-
-//Функция закрытия модальных окон по клику на оверлай
-function closePopups(evt) {
-  if (evt.target === popupEdit || (evt.key === "Escape" && popupEdit.classList.contains("popup_opened"))) {
-    popupVisibility(popupEdit)
-  }
-  else if (evt.target === popupAdd || (evt.key === "Escape" && popupAdd.classList.contains("popup_opened"))) {
-    popupVisibility(popupAdd)
-  }
-  else if (evt.target === popupBigImg || (evt.key === "Escape" && popupBigImg.classList.contains("popup_opened"))) {
-    popupVisibility(popupBigImg);
-  }
-}
-
-
-// Функция удаления карточки из секции
-function delCard(evt) {
-  evt.target.parentElement.remove();
-}
-
-// Функция проставления лайка
-function like(evt) {
-  evt.target.classList.toggle("place__like-icon_filled");
-}
 
 // Функция добавления карточки в начало массива
 function addCard(card) {
@@ -196,6 +203,7 @@ function formSubmitHandlerAdd(evt) {
   //Очищаем форму
   formAdd.reset();
 }
+
 
 // СЛУШАТЕЛИ СОБЫТИЙ
 // Слушатель отправки формы редактирования профиля

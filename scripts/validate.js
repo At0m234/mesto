@@ -14,39 +14,20 @@ const configObj = {
 };
 
 
-// Функция отображения ошибок валидации
-const showInputError = (formElement, inputElement, errorMessage, obj) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(obj.inputErrorClass);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(obj.errorClass);
-};
-
-
-// Функция скрытия ошибок валидации
-const hideInputError = (formElement, inputElement, obj) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(obj.inputErrorClass);
-  errorElement.classList.remove(obj.errorClass);
-  // Очистка ошибки
-  errorElement.textContent = '';
-};
-
-
 // Функция проверки валидности заполняемого поля
 const checkInputValidity = (formElement, inputElement, obj) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, obj);
-  } else {
-    hideInputError(formElement, inputElement, obj);
-  }
+	const show = !inputElement.validity.valid;
+	const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+	inputElement.classList.toggle(obj.inputErrorClass, show);
+	errorElement.classList.toggle(obj.errorClass, show);
+	errorElement.textContent = inputElement.validationMessage;
 };
 
 
 // Функция, обходящая массив полей для проверки их валидности
-const hasInvalidInput = (inputsList) => {
+const hasInvalidInput = (inputElements) => {
   // проходим по массиву методом some
-  return inputsList.some((inputElement) => {
+  return inputElements.some((inputElement) => {
     // Если поле не валидно, колбэк вернёт true
     // Обход массива прекратится и вся фунцкция
     // hasInvalidInput вернёт true
@@ -57,9 +38,9 @@ const hasInvalidInput = (inputsList) => {
 
 // Функция принимает массив полей ввода
 // элемент формы - кнопку "Submit", состояние которой меняется
-const toggleButtonState = (inputsList, buttonElement, obj) => {
+const toggleButtonState = (inputElements, buttonElement, obj) => {
 // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputsList)) {
+  if (hasInvalidInput(inputElements)) {
 // сделает кнопку неактивной
     buttonElement.classList.add(obj.inactiveButtonClass);
     buttonElement.setAttribute('disabled', 'true');
@@ -74,19 +55,18 @@ const toggleButtonState = (inputsList, buttonElement, obj) => {
 // Функция добавления слушателей событий всем полям ввода формы
 const setEventListeners = (formElement, obj) => {
   // Находим все поля внутри формы, делаем из них массив
-  const inputsList = Array.from(formElement.querySelectorAll(obj.inputSelector));
+  const inputElements = Array.from(formElement.querySelectorAll(obj.inputSelector));
   const buttonElement = formElement.querySelector(obj.submitButtonSelector);
   // Проверяем состояние кнопки при первой загрузке страницы
-  toggleButtonState(inputsList, buttonElement, obj);
+  toggleButtonState(inputElements, buttonElement, obj);
   // Обойдем все элементы полученной коллекции
-  inputsList.forEach((inputElement) => {
+  inputElements.forEach((inputElement) => {
     // каждому полю добавим обработчик события input
     inputElement.addEventListener('input', () => {
       // Внутри колбэка вызовем
       // передав ей форму и проверяемый элемент
-      checkInputValidity(formElement, inputElement, obj);
-      // Проверка состояния кнопки при каждом изменении символа в любом из полей
-      toggleButtonState(inputsList, buttonElement, obj);
+      checkInputValidity(formElement, inputElement, configObj);
+      toggleButtonState(inputElements, buttonElement, obj);
     });
   });
 };
@@ -95,9 +75,9 @@ const setEventListeners = (formElement, obj) => {
 // Функция запуска процесса валидации полей ввода всех форм
 const enableValidation = (obj) => {
   // НАЙДЕМ ВСЕ ПОЛЯ ФОРМЫ С УКАЗАННЫХ КЛАСОМ В DOM И СОЗДАДИМ ИЗ НИХ МАССИВ
-  const formsList = Array.from(document.querySelectorAll(obj.formSelector));
+  const formElements = Array.from(document.querySelectorAll(obj.formSelector));
   // ПЕРЕБЕРЕМ ПОЛУЧЕННУЮ КОЛЛЕКЦИЮ
-  formsList.forEach((formElement) => {
+  formElements.forEach((formElement) => {
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
     setEventListeners(formElement, obj);
