@@ -85,12 +85,7 @@ function popupPreInit(formElement, obj) {
 // Функция отображения попапов
 function popupVisibility(popup) {
   toggleEventListeners(popup);
-	if(popup === popupEdit) {
-		popupPreInit(formEdit, configObj);
-  }
-  else if (popup === popupAdd) {
-		popupPreInit(formAdd,  configObj);
-  }
+	popupPreInit(popup, configObj);
   popup.classList.toggle("popup_opened");
 };
 
@@ -210,8 +205,6 @@ function formSubmitHandlerAdd(evt) {
   createCard(newCard, false);
   // Вызываем функцию закрытия модального окна
   popupVisibility(popupAdd);
-  //Очищаем форму
-  formAdd.reset();
 }
 
 
