@@ -1,4 +1,6 @@
 import {Card} from './Card.js';
+import { popupBigImg } from './utils.js'
+
 import {FormValidator} from './FormValidator.js';
 
 // ОБЪЯВЛЕНИЕ ПЕРЕМЕННЫХ - ПОИСК И ДОБАВЛЕНИЕ В DOM
@@ -21,9 +23,7 @@ const addPopupContainer = document.querySelector("#add_container");
 const addTitleInput = document.querySelector("#title");
 const addPlaceInput = document.querySelector("#placeUrl");
 
-export const popupImg = document.querySelector(".popup__big-img");
-export const popupCaption = document.querySelector(".popup__caption");
-export const popupBigImg = document.querySelector("#popup_img");
+
 const imgCloseBtn = document.querySelector('#imgPopupClose')
 
 export const places = document.querySelector(".places");
@@ -97,7 +97,7 @@ function editPopupInfo() {
 function hidePrevErrors(formElement, inputElements, obj, isValid) {
   inputElements.forEach((inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    if(isValid){
+    if(isValid) {
       errorElement.classList.remove(obj.errorClass);
       errorElement.textContent = "";
       inputElement.classList.remove(configObj.inputErrorClass)
@@ -133,16 +133,6 @@ function addPopupPreInit(formElement, obj) {
   formAdd.reset();
 }
 
-
-// Функция отображения попапов
-function popupVisibility(popup) {
-  addPopupPreInit(popupAdd, configObj);
-  editPopupPreInit(popupEdit, configObj);
-  toggleEventListeners(popup);
-  popup.classList.toggle("popup_opened");
-};
-
-
 //Функция смены отображения модальных окон по клику на оверлай
 function togglePopup(evt) {
 	const openedPopup = document.querySelector(".popup_opened");
@@ -166,6 +156,15 @@ function toggleEventListeners (popup) {
     window.removeEventListener('keydown', togglePopup);
   }
 }
+
+
+// Функция отображения попапов
+function popupVisibility(popup) {
+  addPopupPreInit(popupAdd, configObj);
+  editPopupPreInit(popupEdit, configObj);
+  toggleEventListeners(popup);
+  popup.classList.toggle("popup_opened");
+};
 
 
 // Функция обработчика для отправки формы (РЕДАКТИРОВАНИЕ ПРОФИЛЯ)
