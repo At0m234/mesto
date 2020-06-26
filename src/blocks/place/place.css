@@ -2,6 +2,7 @@
 @import url(__info/place__info.css);
 @import url(__name/place__name.css);
 @import url(__like-icon/place__like-icon.css);
+@import url(__like-icon/_filled/place__like-icon_filled.css);
 @import url(__trash/place__trash.css);
 
 .place {
