@@ -20,7 +20,7 @@ export class Card {
   }
   // Приватный метод удаления карточки
   _removeCard() {
-    this._element.querySelector(".place__trash").closest('.place').remove();
+    this._element.remove();
   }
   // Приватный метод проставления лайка для карточки
   _likeCard() {

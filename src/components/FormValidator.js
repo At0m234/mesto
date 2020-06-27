@@ -6,6 +6,7 @@ export class FormValidator {
     // Элемент формы, который валидируется
     this._formElement = formElement;
   }
+
   // Приватный метод отображения сообщений об ошибке
   _showInputError(formElement, inputElement, errorMessage, configObj) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -13,22 +14,25 @@ export class FormValidator {
     errorElement.textContent = errorMessage;
     errorElement.classList.add(configObj.errorClass);
   }
-  // Приватный метод скрытия сообщений об ошибке
-  _hideInputError(formElement, inputElement, configObj) {
+
+  // Публичный метод скрытия сообщений об ошибке
+  hideInputError(formElement, inputElement, configObj) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(configObj.inputErrorClass);
     errorElement.classList.remove(configObj.errorClass);
     errorElement.textContent = "";
   }
+
   // Приватный метод, который в зависимости от валидности введенного значения
   // показывает или скрывает ошибку
   _checkInputValidity(formElement, inputElement, configObj) {
     if (!inputElement.validity.valid) {
       this._showInputError(formElement, inputElement, inputElement.validationMessage, configObj);
     } else {
-      this._hideInputError(formElement ,inputElement, configObj);
+      this.hideInputError(formElement ,inputElement, configObj);
     }
   }
+
   // Приватный метод, который который проверяет валидность введенных значений в поле
   _hasInvalidInput(inputElements) {
     // проходим по массиву методом some
@@ -39,6 +43,7 @@ export class FormValidator {
     return !inputElement.validity.valid;
     })
   }
+
   // Приватный метод изменения состояния кнопки сабмита
   _toggleButtonState(inputElements, buttonElement, configObj) {
     // Если есть хотя бы один невалидный инпут
@@ -52,6 +57,7 @@ export class FormValidator {
         buttonElement.removeAttribute('disabled');
         }
   }
+
   // Приватный метод установки слушателей
   _setEventListeners(formElement, configObj) {
     // Находим все поля внутри формы, делаем из них массив
@@ -71,8 +77,10 @@ export class FormValidator {
       })
     })
   }
+
   // Публичный метод, который включает валидацию формы
   enableValidation() {
       this._setEventListeners(this._formElement, this._configObj);
     }
+
 }

@@ -18,36 +18,36 @@ export const editBtn = document.querySelector(".profile__edit-btn");
 export const formAdd = document.forms.add;
 export const addBtn = document.querySelector(".profile__add-btn");
 
-export const popupImg = document.querySelector(".popup__big-img");
-export const popupCaption = document.querySelector(".popup__caption");
+export const inputsListFormEdit = Array.from(formEdit.querySelectorAll('.popup__text'));
+export const inputsListFormAdd = Array.from(formAdd.querySelectorAll('.popup__text'));
 
 export const places = document.querySelector(".places");
 
 // Массив с объектами ключ-значение
 export const initialCards = [
   {
-    name: "ко чанг",
-    link: koChang,
-  },
-  {
-    name: "лаго ди брайес",
-    link: lagoDiBraies,
-  },
-  {
-    name: "сьерра невада",
-    link: yosemiteValley,
-  },
-  {
-    name: "камчатка",
-    link: kamchatka,
+    name: "архыз",
+    link: arkhyz,
   },
   {
     name: "байкал",
     link: baikal,
   },
   {
-    name: "архыз",
-    link: arkhyz,
+    name: "камчатка",
+    link: kamchatka,
+  },
+  {
+    name: "сьерра невада",
+    link: yosemiteValley,
+  },
+  {
+    name: "лаго ди брайес",
+    link: lagoDiBraies,
+  },
+  {
+    name: "ко чанг",
+    link: koChang,
   }
 ];
 

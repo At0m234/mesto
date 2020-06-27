@@ -19,7 +19,7 @@ export class UserInfo {
   getUserInfo() {
     this._formValues = {};
     this._formValues[nameInput.name] = profileTitle.textContent;
-    this._formValues[jobInput.profession] = profileProfession.textContent;
+    this._formValues[jobInput.name] = profileProfession.textContent;
 
     return this._formValues;
   }

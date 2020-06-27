@@ -1,5 +1,4 @@
 import { Popup } from './Popup.js';
-import { popupImg, popupCaption } from '../utils/constants.js'
 
 export class PopupWithImage extends Popup {
   constructor(popupSelector) {
@@ -7,10 +6,13 @@ export class PopupWithImage extends Popup {
   }
   // Публичный метод открытия попапа
   open(cardImg) {
+    // Находим в попапе картинку и подпись к ней
+    this._popupImg = this._popup.querySelector('.popup__big-img');
+    this._popupCaption = this._popup.querySelector('.popup__caption');
     // Вставляет в попап картинку и атрибут src изображения и подпись к картинке
-    popupImg.src = cardImg.src;
-    popupImg.alt = cardImg.alt;
-    popupCaption.textContent = cardImg.alt;
+    this._popupImg.src = cardImg.src;
+    this._popupImg.alt = cardImg.alt;
+    this._popupCaption.textContent = cardImg.alt;
     // Родительский метод открытия попапа
     super.open();
   }

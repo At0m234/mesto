@@ -9,12 +9,12 @@ import './pages/index.css';
 import {
   nameInput,
   jobInput,
-  profileTitle,
-  profileProfession,
   formEdit,
   editBtn,
+  inputsListFormEdit,
   formAdd,
   addBtn,
+  inputsListFormAdd,
   places,
   initialCards,
   configObj
@@ -48,13 +48,13 @@ const cardsList = new Section({
         popupImage.open(cardImg)
       }});
     const placeElement = card.generateCard();
-    cardsList.addItem(placeElement);
+    cardsList.addItem(placeElement, false);
     },
   },
   places
 );
 
-cardsList._renderItems();
+cardsList.renderItems();
 
 
 
@@ -62,8 +62,16 @@ cardsList._renderItems();
 const popupAdd = new PopupWithForm ({
   popupSelector: '.popup_add',
   handleFormSubmit: (formData) => {
-    cardsList._renderItems([{ name: formData.title, link: formData.place }])
-}
+    // Создаем экземляр класса Card со своей разметкой
+    const newCard = new Card({
+      data: { name: formData.title, link: formData.place },
+      cardSelector: '#place',
+      handleCardClick: (cardImg) => {
+        popupImage.open(cardImg)
+      }});
+    const newPlace = newCard.generateCard();
+    cardsList.addItem(newPlace, true);
+  },
 })
 
 popupAdd.setEventListeners();
@@ -84,38 +92,27 @@ const popupEdit = new PopupWithForm({
 
 popupEdit.setEventListeners();
 
-
-
-// Функция отображения и скрытия невалидности полей форм
-function hidePrevErrors(formElement, inputElements, isValid) {
+// Функция очистки полей от старых ошибок
+function clearOldErrors(formElement, inputElements, formValid) {
   inputElements.forEach((inputElement) => {
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-
-    if(isValid) {
-      errorElement.textContent = "";
-      inputElement.classList.remove(configObj.inputErrorClass)
-    } else {
-      errorElement.textContent = "";
-      inputElement.classList.add(configObj.inputErrorClass)
-    }
-  });
-
+    formValid.hideInputError(formElement, inputElement, configObj)
+  })
 }
 
 // Функция предварительной подготовки и проверки
 // попапа редактирования профиля перед открытием
 function editPopupPreInit() {
 
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileProfession.textContent;
+  clearOldErrors(formEdit, inputsListFormEdit, editValid);
 
+  const editInputValues = userInfo.getUserInfo();
 
-  const saveBtn = document.querySelector('#saveBtn');
+  nameInput.value = editInputValues.name;
+  jobInput.value = editInputValues.profession;
+
+  const saveBtn = formEdit.elements.save;
   saveBtn.classList.remove(configObj.inactiveButtonClass);
-  saveBtn.removeAttribute('disabled', 'false');
-
-  const formInputs = formEdit.querySelectorAll(configObj.inputSelector);
-  hidePrevErrors(formEdit, formInputs, true);
+  saveBtn.removeAttribute('disabled');
 
   popupEdit.open();
 }
@@ -123,14 +120,14 @@ function editPopupPreInit() {
 // Функция предварительной подготовки и проверки
 // попапа добавления карточки перед открытием
 function addPopupPreInit() {
+
+  clearOldErrors(formAdd, inputsListFormAdd, addValid);
+
   formAdd.reset();
 
-  const createBtn = document.querySelector('#createBtn');
+  const createBtn = formAdd.elements.create;
   createBtn.classList.add(configObj.inactiveButtonClass);
   createBtn.setAttribute('disabled', 'true');
-
-  const formInputs = formAdd.querySelectorAll(configObj.inputSelector);
-  hidePrevErrors(formAdd, formInputs, false);
 
   popupAdd.open();
 }
