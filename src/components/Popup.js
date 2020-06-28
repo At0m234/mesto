@@ -4,29 +4,37 @@ export class Popup {
   constructor({popupSelector}) {
     // Селектор попапа
     this._popup = document.querySelector(popupSelector);
+    this._handleEscClose = (evt) => {
+        if ((this._popup.classList.contains('popup_opened')) && (evt.key === "Escape")) {
+          this._popup.classList.toggle("popup_opened");
+          this.close();
+        }
+    }
   }
   // Публчный метод открытия попапа
   open() {
     this._popup.classList.add("popup_opened")
     // Добавляем слушатель нажатия клавиши Esc
-    document.addEventListener('keydown', (evt) => this._handleEscClose(evt))
+    document.addEventListener('keydown', this._handleEscClose);
   }
   // Публичный метод закрытия попапа
   close() {
     this._popup.classList.remove("popup_opened")
     // Удаляем слушатель нажатия клавиши Esc
-    document.removeEventListener('keydown', (evt) => this._handleEscClose(evt))
+    document.removeEventListener('keydown', this._handleEscClose);
   }
   // Приватный метод содержит логику закрытия попапа на клавишу Esc
   _handleEscClose(evt) {
     if ((this._popup.classList.contains('popup_opened')) && (evt.key === "Escape")) {
-      this._popup.classList.toggle("popup_opened")
+      this._popup.classList.toggle("popup_opened");
+      this.close();
     }
   }
   // Приватный метод содержит логику закрытия попапа по клику на оверлэй
   _handleOverlayClose(evt) {
     if ((this._popup.classList.contains('popup_opened')) && (evt.target.classList.contains('popup'))) {
-      this._popup.classList.toggle("popup_opened")
+      this._popup.classList.toggle("popup_opened");
+      this.close();
     }
   }
   // Публичный метод добавляет слушатели клика иконке закрытия попапа, оверлэю и Esc

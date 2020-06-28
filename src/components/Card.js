@@ -21,6 +21,7 @@ export class Card {
   // Приватный метод удаления карточки
   _removeCard() {
     this._element.remove();
+    this._element = null;
   }
   // Приватный метод проставления лайка для карточки
   _likeCard() {

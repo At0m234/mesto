@@ -4,7 +4,7 @@
   "description": "[https://at0m234.github.io/mesto/index.html] ### Обзор",
   "main": "index.js",
   "scripts": {
-    "build": "rd /s /q dist && webpack",
+    "build": "rimraf dist && webpack",
     "dev": "webpack-dev-server --open --watch"
   },
   "repository": {
