@@ -6,7 +6,6 @@ export class Popup {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = (evt) => {
         if ((this._popup.classList.contains('popup_opened')) && (evt.key === "Escape")) {
-          this._popup.classList.toggle("popup_opened");
           this.close();
         }
     }
@@ -23,17 +22,9 @@ export class Popup {
     // Удаляем слушатель нажатия клавиши Esc
     document.removeEventListener('keydown', this._handleEscClose);
   }
-  // Приватный метод содержит логику закрытия попапа на клавишу Esc
-  _handleEscClose(evt) {
-    if ((this._popup.classList.contains('popup_opened')) && (evt.key === "Escape")) {
-      this._popup.classList.toggle("popup_opened");
-      this.close();
-    }
-  }
   // Приватный метод содержит логику закрытия попапа по клику на оверлэй
   _handleOverlayClose(evt) {
     if ((this._popup.classList.contains('popup_opened')) && (evt.target.classList.contains('popup'))) {
-      this._popup.classList.toggle("popup_opened");
       this.close();
     }
   }
