@@ -1,5 +1,4 @@
 // Класс Popup отвечает за открытие и закрытие попапа
-
 export class Popup {
   constructor({popupSelector}) {
     // Селектор попапа

@@ -2,9 +2,9 @@
 // У класса Section нет своей разметки
 
 export class Section {
-  constructor({ items, renderer }, сontainerSelector) {
+  constructor({ data, renderer }, сontainerSelector) {
     // Массив данных, которые нужно добавить на страницу при инициализации класса
-    this._renderedItems = items;
+    this._renderedItems = data;
     // Функция, которая отвечает за создание и отрисовку данных на странице
     this._renderer = renderer;
     // Селектор контейнера, в который нужно добавлять созданные элементы
@@ -12,8 +12,8 @@ export class Section {
   }
   // Приветный метод, отвечающий за отрисовку всех элементов.
   // Отрисовка каждого отдельного элемента должна осуществляться функцией renderer
-  renderItems() {
-    this._renderedItems.forEach(item => this._renderer(item));
+  renderItems(data, userId) {
+    data.forEach(item => this._renderer(item, userId));
   }
   // Публичный метод, который принимает DOM-элемент и добавляет его в контейнер
   addItem(element, newCard) {

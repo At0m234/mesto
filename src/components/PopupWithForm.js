@@ -31,9 +31,8 @@ export class PopupWithForm extends Popup {
       // вызываем функцию _handleFormSubmit,
       // передав в ее аргумент заполненный объект со значениями полей,
       // полученный из метода _getInputValues
-      this._handleFormSubmit(this._getInputValues());
       // Вызываем публичный метод закрытия формы
-      this.close();
+      this._handleFormSubmit(this._getInputValues(), this.close());
     })
   }
   // Публичный метод закрытия попапа и очистки формы
@@ -42,5 +41,15 @@ export class PopupWithForm extends Popup {
     super.close();
     // Очищаем форму
     this._popup.querySelector('.popup__container').reset();
+  }
+  // Публичный метод отображения состояния кнопки сабмита во время загрузки данных
+  saving(inProgress) {
+    if (inProgress) {
+        this._popup.querySelector('.popup__save').textContent = 'Сохранение...';
+    } else {
+        document.querySelector('.popup__save_edit').textContent = 'Сохранить';
+        document.querySelector('.popup__save_create').textContent = 'Создать';
+        document.querySelector('.popup__save_avatar').textContent = 'Сохранить';
+    }
   }
 }

@@ -3,6 +3,7 @@ import {
   jobInput,
   profileTitle,
   profileProfession,
+  profileImage
 } from '../utils/constants.js';
 
 // Класс UserInfo отвечает за управление отображением информации о пользователе на странице
@@ -24,9 +25,10 @@ export class UserInfo {
     return this._formValues;
   }
 
-// Публичный метод, который принимает новые данные пользователя и добавляет их на страницу
+  // Публичный метод, который принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(formData) {
     this._name.textContent = formData.name;
-    this._profession.textContent = formData.profession;
+    this._profession.textContent = formData.about;
+    profileImage.setAttribute('alt', formData.name);
   }
 }

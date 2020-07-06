@@ -1,0 +1,19 @@
+.profile__img-container {
+  position: relative;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.profile__img-container:hover .profile__img-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.profile__img-container:hover .profile__img-btn {
+  visibility: visible;
+}
