@@ -1,8 +1,6 @@
-import { api, popupRemove } from '../index.js'
-
 // Класс Card создаёт карточку с текстом и ссылкой на изображение
 export class Card {
-  constructor({data, cardSelector, handleCardClick}) {
+  constructor({data, cardSelector, handleCardClick, popupRemove, handlerAddLike, handlerRemoveLike}) {
     this._link = data.link;
     this._name = data.name;
     this._likes = data.likes;
@@ -11,6 +9,9 @@ export class Card {
     this._cardId= data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._popupRemove = popupRemove;
+    this._handlerAddLike = handlerAddLike;
+    this._handlerRemoveLike = handlerRemoveLike
   }
   // Приватный метод, который достает шаблон карточки,
   // клонирует содержимое тега template
@@ -28,20 +29,12 @@ export class Card {
   _toggleCardLike() {
     const like = this._element.querySelector('.place__like-icon');
 
-    like.classList.toggle('.place__like-icon_filled');
+    like.classList.toggle('place__like-icon_filled');
 
-    if(like.classList.contains('.place__like-icon_filled')) {
-      api.addLike(this._cardId)
-        .then((data) => {
-          this._element.querySelector('.place__like-counter').textContent = data.likes.length;
-        })
-        .catch(err => console.log(err))
+    if(like.classList.contains('place__like-icon_filled')) {
+      this._handlerAddLike();
     } else {
-      api.removeLike(this._cardId)
-      .then((data) => {
-        this._element.querySelector('.place__like-counter').textContent = data.likes.length;
-      })
-      .catch(err => console.log(err))
+      this._handlerRemoveLike();
     }
   }
 
@@ -49,7 +42,7 @@ export class Card {
   _setCardEventListeners() {
     // Находим кнопку удаления и добавляем ей слушатель, который по клику удаляет карточку
     this._element.querySelector(".place__trash").addEventListener('click', () => {
-      popupRemove.open(this._element, this._cardId)
+      this._popupRemove.open(this._element, this._cardId)
     });
     // Находим кнопку лайка и добавляем ей слушатель, который по клику ставит лайк карточке
     this._element.querySelector(".place__like-icon").addEventListener('click', () => {

@@ -15,17 +15,17 @@
     <!-- ПРОФИЛЬ БЛОК 2 -->
     <section class="profile">
       <div class="profile__img-container">
-        <img src="images/Jacques Yves Cousteau.jpg" alt="Жак-Ив Кусто" class="profile__image">
+        <img id = "profileImage" name="profileImage" class="profile__image">
         <div class="profile__img-overlay">
           <button type="button" class="profile__img-btn" aria-label="Редактировать картинку"></button>
         </div>
       </div>
       <div class="profile__container">
         <div class="profile__button-wrapper">
-          <h1 class="profile__title">жак-ив кусто</h1>
+          <h1 class="profile__title"></h1>
           <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
         </div>
-        <p class="profile__profession">Исследователь океана</p>
+        <p class="profile__profession"></p>
       </div>
       <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
     </section>
@@ -35,7 +35,7 @@
     </section>
     <!-- EDIT POP-UP -->
     <section class="popup popup_edit" id="popup_edit">
-      <form name="edit" method="POST" action="#" novalidate class="popup__container" id="edit_container">
+      <form name="edit" method="POST" action="#" novalidate class="popup__container popup__container_edit" id="edit_container">
         <h3 class="popup__title">Редактировать профиль</h3>
         <button type="button" aria-label="Закрыть" class="popup__close-icon"></button>
         <input type="text" name="name" required placeholder="Имя" id="name" minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁё -]{1,}" class="popup__text popup__text_name">
@@ -47,7 +47,7 @@
     </section>
     <!-- ADD POP-UP -->
     <section class="popup popup_add" id="popup_add">
-      <form name="add" method="POST" action="#"  novalidate class="popup__container" id="add_container">
+      <form name="add" method="POST" action="#"  novalidate class="popup__container popup__container_add" id="add_container">
         <h3 class="popup__title">Новое место</h3>
         <button type="button" aria-label="Закрыть" class="popup__close-icon" id="addPopupClose"></button>
         <input type="text" name="title" required placeholder="Название" id="title" minlength="1" maxlength="30" class="popup__text popup__text_name">
@@ -67,7 +67,7 @@
     </section>
     <!-- REMOVE POP-UP -->
     <section class="popup popup_remove" id="popup_remove">
-      <form name="remove" method="POST" action="#" novalidate class="popup__container" id="remove_container">
+      <form name="remove" method="POST" action="#" novalidate class="popup__container popup__container_remove" id="remove_container">
         <h3 class="popup__title">Вы уверены&#63;</h3>
         <button type="button" aria-label="Закрыть" class="popup__close-icon"></button>
         <button type="submit" name="agree" id='agreeBtn' class="popup__save">Да</button>
@@ -75,7 +75,7 @@
     </section>
     <!-- AVATAR POP-UP -->
     <section class="popup popup_avatar" id="popup_avatar">
-      <form name="avatar" method="PATCH" action="#"  novalidate class="popup__container" id="avatar_container">
+      <form name="avatar" method="PATCH" action="#"  novalidate class="popup__container popup__container_avatar" id="avatar_container">
         <h3 class="popup__title">Обновить аватар</h3>
         <button type="button" aria-label="Закрыть" class="popup__close-icon" id="avatarPopupClose"></button>
         <input type="url" name="url" required placeholder="Ссылка на картинку" id="placeUrl" class="popup__text popup__text_name popup__text_avatar">

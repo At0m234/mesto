@@ -16,7 +16,7 @@ export class FormValidator {
   }
 
   // Публичный метод скрытия сообщений об ошибке
-  hideInputError(formElement, inputElement, configObj) {
+  _hideInputError(formElement, inputElement, configObj) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(configObj.inputErrorClass);
     errorElement.classList.remove(configObj.errorClass);
@@ -29,7 +29,7 @@ export class FormValidator {
     if (!inputElement.validity.valid) {
       this._showInputError(formElement, inputElement, inputElement.validationMessage, configObj);
     } else {
-      this.hideInputError(formElement ,inputElement, configObj);
+      this._hideInputError(formElement ,inputElement, configObj);
     }
   }
 
@@ -82,5 +82,20 @@ export class FormValidator {
   enableValidation() {
       this._setEventListeners(this._formElement, this._configObj);
     }
+
+  popupPreInit(formElement, inputElements, formValid, buttonElement, configObj) {
+    inputElements.forEach((inputElement) => {
+      formValid._hideInputError(formElement, inputElement, configObj)
+    })
+
+    if (this._formElement.classList.contains('popup__container_edit')) {
+      buttonElement.classList.remove(configObj.inactiveButtonClass);
+      buttonElement.removeAttribute('disabled');
+    } else {
+      buttonElement.classList.add(configObj.inactiveButtonClass);
+      buttonElement.setAttribute('disabled', 'true');
+      this._formElement.reset()
+    }
+  }
 
 }

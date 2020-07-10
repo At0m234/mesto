@@ -1,12 +1,13 @@
 .profile__img-container {
+  display: inline-block;
   position: relative;
   height: 120px;
   width: 120px;
   border-radius: 50%;
-  display: flex;
   justify-content: center;
   align-items: center;
   justify-items: center;
+  overflow: hidden;
 }
 
 .profile__img-container:hover .profile__img-overlay {

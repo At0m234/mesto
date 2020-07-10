@@ -1,12 +1,12 @@
-import { Card } from './components/Card.js';
-import { FormValidator } from './components/FormValidator.js';
-import { Section } from './components/Section.js';
-import { PopupWithForm } from './components/PopupWithForm.js';
-import { UserInfo } from './components/UserInfo.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
-import { Api } from './components/Api.js';
-import { PopupRemoveCard } from './components/PopupRemoveCard.js';
-import './pages/index.css';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { Api } from '../components/Api.js';
+import { PopupRemoveCard } from '../components/PopupRemoveCard.js';
+import './index.css';
 
 import {
   profileTitle,
@@ -16,16 +16,35 @@ import {
   jobInput,
   formEdit,
   editBtn,
+  EditSaveBtn,
   inputsListFormEdit,
   formAdd,
   addBtn,
+  addCreateBtn,
   inputsListFormAdd,
   formAvatar,
   editAvatar,
+  editAvatarBtn,
   inputsListFormAvatar,
   places,
   configObj
-} from './utils/constants.js';
+} from '../utils/constants.js';
+
+
+// Создаем экземляр класса PopupWithForm для формы удаления карточки
+const popupRemove = new PopupRemoveCard ({
+  popupSelector: '.popup_remove',
+  handleRemoveCard: (cardId, removeElem, closePopup) => {
+  api.removeCard(cardId)
+    .then((data) => {
+      console.log(data);
+      removeElem.querySelector('.place__trash').closest('.place').remove();
+      closePopup;
+    })
+    .catch(err => console.log(err))
+  }
+});
+popupRemove.setEventListeners();
 
 
 // Создаем экземляр класса Section для отрисовки карточек из массива
@@ -38,7 +57,23 @@ export const cardsList = new Section({
       cardSelector: '#place',
       handleCardClick: (cardImg) => {
         popupImage.open(cardImg)
-      }});
+      },
+      popupRemove: popupRemove,
+      handlerAddLike: () => {
+        api.addLike(item._id)
+        .then((data) => {
+          placeElement.querySelector('.place__like-counter').textContent = data.likes.length;
+        })
+        .catch(err => console.log(err))
+      },
+      handlerRemoveLike: () => {
+        api.removeLike(item._id)
+        .then((data) => {
+          placeElement.querySelector('.place__like-counter').textContent = data.likes.length;
+        })
+        .catch(err => console.log(err))
+      }
+    });
     const placeElement = card.generateCard(userId);
     cardsList.addItem(placeElement, false);
   },
@@ -56,7 +91,10 @@ export const api = new Api({
 // Создаем экземляр класса UserInfo для отображения информации о пользователе на странице
 const userInfo = new UserInfo({
   nameSelector: '.profile__title',
-  professionSelector: '.profile__profession'
+  professionSelector: '.profile__profession',
+  profileTitle: profileTitle,
+  profileProfession: profileProfession,
+  profileImage: profileImage
 })
 
 
@@ -117,7 +155,6 @@ const popupAdd = new PopupWithForm ({
         popupAdd.saving(false)
       });
   },
-
 })
 popupAdd.setEventListeners();
 
@@ -133,6 +170,13 @@ const popupAvatar = new PopupWithForm({
       .then((data) => {
         // обновляем аватар пользователя на странице
         // после удачного ответа сервера
+
+
+        // Арина, здравствуйте, задачу я выполнил своим способом, с Вашим вариантом решения я к сожалению
+        // не смог разобраться и понять, как через slice() решить данный вопрос.
+        // Могу я попросить Вас объяснить мне, как я должен был сделать по Вашей задумке?
+
+
         profileImage.src = data.avatar;
         // закрываем попап после успешного ответа сервера
         closePopup;
@@ -141,7 +185,7 @@ const popupAvatar = new PopupWithForm({
         console.log(err);
       })
       .finally(() => {
-        // вызываем renderLoading
+        // вызываем метод saving для стандартного отображения кнопки сабмита
         popupAvatar.saving(false)
       });
   }
@@ -151,40 +195,21 @@ popupAvatar.setEventListeners();
 
 // Создаем экземляр класса для попапа с изображением
 const popupImage = new PopupWithImage({
-  popupSelector: '#popup_img'
+  popupSelector: '#popup_img',
+  imageSelector: '.popup__big-img',
+  imageCaptionSelector: '.popup__caption'
 });
 popupImage.setEventListeners();
-
-
-// Создаем экземляр класса PopupWithForm для формы удаления карточки
-export const popupRemove = new PopupRemoveCard ({
-  popupSelector: '.popup_remove',
-});
-popupRemove.setEventListeners();
-
-
-// Функция очистки полей от старых ошибок
-function clearOldErrors(formElement, inputElements, formValid) {
-  inputElements.forEach((inputElement) => {
-    formValid.hideInputError(formElement, inputElement, configObj)
-  })
-}
 
 
 // Функция предварительной подготовки и проверки
 // попапа редактирования профиля перед открытием
 function editPopupPreInit() {
-  // очищаем форму от старых ошибок
-  clearOldErrors(formEdit, inputsListFormEdit, editValid);
+  editValid.popupPreInit(formEdit, inputsListFormEdit, editValid, EditSaveBtn, configObj);
 
-  const editInputValues = userInfo.getUserInfo();
-
+  const editInputValues = userInfo.getUserInfo(nameInput, jobInput);
   nameInput.value = editInputValues.name;
   jobInput.value = editInputValues.profession;
-  // делаем кнопку неактивной при открытии
-  const EditSaveBtn = formEdit.elements.save;
-  EditSaveBtn.classList.remove(configObj.inactiveButtonClass);
-  EditSaveBtn.removeAttribute('disabled');
 
   popupEdit.open();
 }
@@ -193,30 +218,14 @@ function editPopupPreInit() {
 // Функция предварительной подготовки и проверки
 // попапа добавления карточки перед открытием
 function addPopupPreInit() {
-  // очищаем форму от старых ошибок
-  clearOldErrors(formAdd, inputsListFormAdd, addValid);
-  // сбрасываем все поля формы
-  formAdd.reset();
-  // делаем кнопку неактивной при открытии
-  const addCreateBtn = formAdd.elements.create;
-  addCreateBtn.classList.add(configObj.inactiveButtonClass);
-  addCreateBtn.setAttribute('disabled', 'true');
-
+  addValid.popupPreInit(formAdd, inputsListFormAdd, addValid, addCreateBtn, configObj);
   popupAdd.open();
 }
 
 
 // Функция подготовки формы смены аватара к открытию
 function avatarPopupPreInit() {
-  // очищаем форму от старых ошибок
-  clearOldErrors(formAvatar, inputsListFormAvatar, avatarValid);
-  // сбрасываем все поля формы
-  formAvatar.reset();
-  // делаем кнопку неактивной при открытии
-  const editAvatarBtn = formAvatar.elements.avatar;
-  editAvatarBtn.classList.add(configObj.inactiveButtonClass);
-  editAvatarBtn.setAttribute('disabled', 'true');
-
+  avatarValid.popupPreInit(formAvatar, inputsListFormAvatar, avatarValid, editAvatarBtn, configObj);
   popupAvatar.open();
 }
 

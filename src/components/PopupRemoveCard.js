@@ -1,9 +1,9 @@
 import { Popup } from './Popup.js'
-import { api } from '../index.js'
 
 export class PopupRemoveCard extends Popup {
-  constructor({popupSelector}) {
+  constructor({popupSelector, handleRemoveCard}) {
     super({popupSelector});
+    this._handleRemoveCard = handleRemoveCard;
   }
 
   setEventListeners() {
@@ -13,15 +13,7 @@ export class PopupRemoveCard extends Popup {
       // отменяем стандартную отправку формы
       evt.preventDefault()
       // удаляем карточку с сервера
-      api.removeCard(this._cardId)
-        .then((data) => {
-          console.log(data);
-          this._element.querySelector('.place__trash').closest('.place').remove()
-        })
-        .catch(err => console.log(err))
-
-      // закрываем форму
-      super.close()
+      this._handleRemoveCard(this._cardId, this._element, super.close());
     })
   }
 
@@ -30,5 +22,4 @@ export class PopupRemoveCard extends Popup {
     this._element = removeElem;
     this._cardId = cardId
   }
-
 }

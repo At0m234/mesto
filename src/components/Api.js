@@ -1,131 +1,90 @@
-import { data } from "autoprefixer";
 export class Api {
   constructor({url, token}) {
     this._url = url;
     this._token = token;
+    this._headers =  {
+      authorization: this._token,
+      'Content-Type': 'application/json',
+    }
+  }
+  // Приватный метод проверки ответа сервера и преобразование из json
+  _getResponseData(additionalUrl, optionsObj) {
+    return fetch(this._url + additionalUrl, optionsObj)
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        // Лучше всего return Promise.reject(new Error(`Ошибка: ${res.status}`));
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
   }
 
   // Метод загрузки информации о пользователе с сервера
   getUserInfo() {
-    return fetch(this._url + '/users/me', {
-      headers: {
-        authorization: this._token
-      }
-    })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err));
+    return this._getResponseData('/users/me', { headers: this._headers });
   }
 
   // Метод загрузки карточек с сервера
   getCards() {
-    return fetch(this._url + '/cards', {
-      headers: {
-        authorization: this._token
-      }
-    })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err));
+    return this._getResponseData('/cards', { headers: this._headers });
   }
 
   // Метод загрузки новых данных о пользователе на сервер
   editUserInfo(formData) {
-    return fetch(this._url + '/users/me', {
+    return this._getResponseData('/users/me', {
       method: 'PATCH',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
+      headers:  this._headers,
       body: JSON.stringify({
         name: formData.name,
         about: formData.profession
       })
     })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err))
   }
 
   // Метод добавления новой карточки на сервер
   addNewCard(formData) {
-    return fetch(this._url + '/cards', {
+    return this._getResponseData('/cards', {
       method: 'POST',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
+      headers:  this._headers,
       body: JSON.stringify({
         name: formData.title,
         link: formData.place
       })
     })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err))
   }
 
   // Метод удаления карточки с сервера
   removeCard(cardId) {
-    return fetch(this._url + '/cards/' + cardId, {
+    return this._getResponseData('/cards/' + cardId, {
       method: 'DELETE',
-      headers: {
-        authorization: this._token,
-      }
+      headers:  this._headers,
     })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err))
   }
 
   // Метод постановки лайка карточке
   addLike(cardId) {
-    return fetch(this._url + '/cards/likes/' + cardId, {
+    return this._getResponseData('/cards/likes/' + cardId, {
       method: 'PUT',
-      headers: {
-        authorization: this._token,
-      },
+      headers:  this._headers,
     })
-    .then(res => {
-      return res.json()
-    })
-      .catch(err => console.log(err))
   }
 
   // Метод снятия лайка с карточки
   removeLike(cardId) {
-    return fetch(this._url + '/cards/likes/' + cardId, {
+    return this._getResponseData('/cards/likes/' + cardId, {
       method: 'DELETE',
-      headers: {
-        authorization: this._token,
-      }
+      headers:  this._headers,
     })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err))
   }
 
   // Метод загрузки аватара пользователя
   changeUserAvatar(url) {
-    return fetch(this._url + '/users/me/avatar', {
+    return this._getResponseData('/users/me/avatar', {
       method: 'PATCH',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
+      headers:  this._headers,
       body: JSON.stringify({
         avatar: url,
       })
     })
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => console.log(err))
   }
 }
