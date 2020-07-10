@@ -18,3 +18,17 @@
 .profile__img-container:hover .profile__img-btn {
   visibility: visible;
 }
+
+@media screen and (max-width: 1023px) {
+  .profile__img-container {
+  display: grid;
+  grid-row: 1/2;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__img-container {
+  display: grid;
+  grid-column: 1/3;
+  }
+}

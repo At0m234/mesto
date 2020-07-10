@@ -42,14 +42,4 @@ export class PopupWithForm extends Popup {
     // Очищаем форму
     this._popup.querySelector('.popup__container').reset();
   }
-  // Публичный метод отображения состояния кнопки сабмита во время загрузки данных
-  saving(inProgress) {
-    if (inProgress) {
-        this._popup.querySelector('.popup__save').textContent = 'Сохранение...';
-    } else {
-        document.querySelector('.popup__save_edit').textContent = 'Сохранить';
-        document.querySelector('.popup__save_create').textContent = 'Создать';
-        document.querySelector('.popup__save_avatar').textContent = 'Сохранить';
-    }
-  }
 }

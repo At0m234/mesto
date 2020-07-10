@@ -8,6 +8,8 @@ import { Api } from '../components/Api.js';
 import { PopupRemoveCard } from '../components/PopupRemoveCard.js';
 import './index.css';
 
+import { saving } from '../utils/utils.js'
+
 import {
   profileTitle,
   profileProfession,
@@ -92,9 +94,6 @@ export const api = new Api({
 const userInfo = new UserInfo({
   nameSelector: '.profile__title',
   professionSelector: '.profile__profession',
-  profileTitle: profileTitle,
-  profileProfession: profileProfession,
-  profileImage: profileImage
 })
 
 
@@ -120,10 +119,10 @@ const popupEdit = new PopupWithForm({
   popupSelector: '.popup_edit',
   handleFormSubmit: (formData, closePopup) => {
     // меняем название кнопки сабмита перед началом загрузки
-    popupEdit.saving(true)
+    saving(true)
     api.editUserInfo(formData)
     .then((data) => {
-      userInfo.setUserInfo(data);
+      userInfo.setUserInfo(data.name, data.about);
       closePopup;
     })
     .catch((err) => {
@@ -131,7 +130,7 @@ const popupEdit = new PopupWithForm({
     })
     .finally(() => {
       // меняем название кнопки сабмита при завершении загрузки
-      popupEdit.saving(false)
+      saving(false)
     });
   }
 });
@@ -143,7 +142,7 @@ const popupAdd = new PopupWithForm ({
   popupSelector: '.popup_add',
   handleFormSubmit: (formData, closePopup) => {
     // меняем название кнопки сабмита перед началом загрузки
-    popupAdd.saving(true)
+    saving(true)
     api.addNewCard(formData)
       .then((data) => {
         cardsList.renderItems([data], data.owner._id)
@@ -152,7 +151,7 @@ const popupAdd = new PopupWithForm ({
       .catch(err => console.log(err))
       .finally(() => {
         // меняем название кнопки сабмита при завершении загрузки
-        popupAdd.saving(false)
+        saving(false)
       });
   },
 })
@@ -164,19 +163,12 @@ const popupAvatar = new PopupWithForm({
   popupSelector: '.popup_avatar',
   handleFormSubmit: (formData, closePopup) => {
     // меняем название кнопки сабмита при загрузке данных на сервис
-    popupAvatar.saving(true)
+    saving(true)
     // обновляем аватар пользователя на сервере
     api.changeUserAvatar(formData.url)
       .then((data) => {
         // обновляем аватар пользователя на странице
         // после удачного ответа сервера
-
-
-        // Арина, здравствуйте, задачу я выполнил своим способом, с Вашим вариантом решения я к сожалению
-        // не смог разобраться и понять, как через slice() решить данный вопрос.
-        // Могу я попросить Вас объяснить мне, как я должен был сделать по Вашей задумке?
-
-
         profileImage.src = data.avatar;
         // закрываем попап после успешного ответа сервера
         closePopup;
@@ -186,7 +178,7 @@ const popupAvatar = new PopupWithForm({
       })
       .finally(() => {
         // вызываем метод saving для стандартного отображения кнопки сабмита
-        popupAvatar.saving(false)
+        saving(false)
       });
   }
 });
@@ -207,9 +199,10 @@ popupImage.setEventListeners();
 function editPopupPreInit() {
   editValid.popupPreInit(formEdit, inputsListFormEdit, editValid, EditSaveBtn, configObj);
 
-  const editInputValues = userInfo.getUserInfo(nameInput, jobInput);
-  nameInput.value = editInputValues.name;
-  jobInput.value = editInputValues.profession;
+  const editInputValues = userInfo.getUserInfo();
+
+  nameInput.value = editInputValues.userName;
+  jobInput.value = editInputValues.userDescription;
 
   popupEdit.open();
 }
