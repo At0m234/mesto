@@ -3,11 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключит�
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: { main: './src/pages/index.js' },
+  entry: {
+    main: './src/pages/index.js'
+  },
   output: {
-  path: path.resolve(__dirname, 'dist'),
-  filename: 'main.js'
-},
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js'
+  },
   module: {
     rules: [ // rules — это массив правил
       // добавим в него объект правил для бабеля
@@ -20,7 +22,7 @@ module.exports = {
         exclude: '/node_modules/'
       },
       {
-         // регулярное выражение, которое ищет все файлы с такими расширениями
+        // регулярное выражение, которое ищет все файлы с такими расширениями
         test: /.(png|svg|jpg|gif)$/,
         // при обработке этих файлов нужно использовать file-loader
         loader: 'file-loader?name=./images/[name].[ext]'

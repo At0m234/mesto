@@ -13,6 +13,7 @@ export class Card {
     this._handlerAddLike = handlerAddLike;
     this._handlerRemoveLike = handlerRemoveLike
   }
+
   // Приватный метод, который достает шаблон карточки,
   // клонирует содержимое тега template
   // и записывает в переменную placeElement
@@ -56,6 +57,7 @@ export class Card {
       this._handleCardClick(placeImage)
     });
   }
+
   // Публичный метод, который возвращает полностью работоспособный
   // и наполненный данными элемент карточки
   generateCard(userId) {

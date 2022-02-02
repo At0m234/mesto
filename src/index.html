@@ -1,39 +1,60 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-  <title>MESTO Russia</title>
-</head>
-<body>
-  <div class="page">
-    <!-- ШАПКА САЙТА БЛОК 1 -->
-    <header class="header">
-      <img src="images/logo_mesto_white.svg" alt="Логотип" class="header__logo">
-    </header>
-    <main class="content">
-    <!-- ПРОФИЛЬ БЛОК 2 -->
-    <section class="profile">
-      <div class="profile__img-container">
-        <img id = "profileImage" name="profileImage" class="profile__image">
-        <div class="profile__img-overlay">
-          <button type="button" class="profile__img-btn" aria-label="Редактировать картинку"></button>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <title>MESTO Russia</title>
+  </head>
+  <body>
+    <div class="page">
+
+      <header class="header">
+        <img src="./images/logo_mesto_white.svg" alt="Логотип" class="header__logo">
+      </header>
+      <main class="content">
+
+        <section class="profile">
+          <div class="profile__img-container">
+            <img id = "profileImage" name="profileImage" class="profile__image">
+            <div class="profile__img-overlay">
+              <button type="button" class="profile__img-btn" aria-label="Редактировать картинку"></button>
+            </div>
+          </div>
+          <div class="profile__container">
+            <div class="profile__button-wrapper">
+              <h1 class="profile__title"></h1>
+              <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
+            </div>
+            <p class="profile__profession"></p>
+          </div>
+          <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
+        </section>
+
+        <section class="places">
+          <!-- Контейнер для добавления карточек -->
+        </section>
+
+      </main>
+
+      <footer class="footer">
+        <nav class="footer__info">
+          <span class="footer__copyright">&copy; 2020 Ильин Владимир Олегович</span>
+        </nav>
+      </footer>
+    </div>
+
+    <template id="place">
+      <div class="place">
+        <button aria-label="Удалить" class="place__trash"></button>
+        <img class="place__image">
+        <div class="place__info">
+          <h2 class="place__name"></h2>
+          <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
+          <span class="place__like-counter">0</span>
         </div>
       </div>
-      <div class="profile__container">
-        <div class="profile__button-wrapper">
-          <h1 class="profile__title"></h1>
-          <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
-        </div>
-        <p class="profile__profession"></p>
-      </div>
-      <button type="button" aria-label="Добавить" class="profile__add-btn"></button>
-    </section>
-    <!-- МЕСТА БЛОК 3 -->
-    <section class="places">
-      <!-- Контейнер для добавления карточек -->
-    </section>
-    <!-- EDIT POP-UP -->
+    </template>
+    <!-- EDIT POPUP -->
     <section class="popup popup_edit" id="popup_edit">
       <form name="edit" method="POST" action="#" novalidate class="popup__container popup__container_edit" id="edit_container">
         <h3 class="popup__title">Редактировать профиль</h3>
@@ -45,7 +66,7 @@
         <button type="submit" name="save" id='saveBtn' class="popup__save popup__save_edit">Сохранить</button>
       </form>
     </section>
-    <!-- ADD POP-UP -->
+    <!-- ADD POPUP -->
     <section class="popup popup_add" id="popup_add">
       <form name="add" method="POST" action="#"  novalidate class="popup__container popup__container_add" id="add_container">
         <h3 class="popup__title">Новое место</h3>
@@ -57,7 +78,7 @@
         <button type="submit" name="create" id='createBtn' class="popup__save popup__save_create">Создать</button>
       </form>
     </section>
-    <!-- IMG POP-UP -->
+    <!-- IMG POPUP -->
     <section class="popup popup_img" id="popup_img">
       <figure class="popup__img-container" id="img_container">
         <button type="button" aria-label="Закрыть" class="popup__close-icon popup__close-icon_img" id="imgPopupClose"></button>
@@ -65,7 +86,7 @@
         <figcaption class="popup__caption"></figcaption>
       </figure>
     </section>
-    <!-- REMOVE POP-UP -->
+    <!-- REMOVE POPUP -->
     <section class="popup popup_remove" id="popup_remove">
       <form name="remove" method="POST" action="#" novalidate class="popup__container popup__container_remove" id="remove_container">
         <h3 class="popup__title">Вы уверены&#63;</h3>
@@ -73,7 +94,7 @@
         <button type="submit" name="agree" id='agreeBtn' class="popup__save">Да</button>
       </form>
     </section>
-    <!-- AVATAR POP-UP -->
+    <!-- AVATAR POPUP -->
     <section class="popup popup_avatar" id="popup_avatar">
       <form name="avatar" method="PATCH" action="#"  novalidate class="popup__container popup__container_avatar" id="avatar_container">
         <h3 class="popup__title">Обновить аватар</h3>
@@ -83,24 +104,6 @@
         <button type="submit" name="avatar" id='avatarBtn' class="popup__save popup__save_avatar">Сохранить</button>
       </form>
     </section>
-    </main>
-    <!-- ПОДВАЛ БЛОК 4 -->
-    <footer class="footer">
-      <nav class="footer__info">
-        <span class="footer__copyright">&copy; 2020 Ильин Владимир Олегович</span>
-      </nav>
-    </footer>
-  </div>
-  <template id="place">
-    <div class="place">
-      <button aria-label="Удалить" class="place__trash"></button>
-      <img class="place__image">
-      <div class="place__info">
-        <h2 class="place__name"></h2>
-        <button type="button" aria-label="Мне нравится" class="place__like-icon"></button>
-        <span class="place__like-counter">0</span>
-      </div>
-    </div>
-  </template>
-</body>
+
+  </body>
 </html>

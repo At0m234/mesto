@@ -37,15 +37,15 @@ import {
 const popupRemove = new PopupRemoveCard ({
   popupSelector: '.popup_remove',
   handleRemoveCard: (cardId, removeElem, closePopup) => {
-  api.removeCard(cardId)
-    .then((data) => {
-      console.log(data);
-      removeElem.querySelector('.place__trash').closest('.place').remove();
-      closePopup;
-    })
-    .catch(err => console.log(err))
+    api.removeCard(cardId)
+      .then((data) => {
+        removeElem.querySelector('.place__trash').closest('.place').remove();
+        closePopup;
+      })
+      .catch(err => console.log(err))
   }
 });
+
 popupRemove.setEventListeners();
 
 
@@ -121,19 +121,20 @@ const popupEdit = new PopupWithForm({
     // меняем название кнопки сабмита перед началом загрузки
     saving(true)
     api.editUserInfo(formData)
-    .then((data) => {
-      userInfo.setUserInfo(data.name, data.about);
-      closePopup;
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      // меняем название кнопки сабмита при завершении загрузки
-      saving(false)
-    });
+      .then((data) => {
+        userInfo.setUserInfo(data.name, data.about);
+        closePopup;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        // меняем название кнопки сабмита при завершении загрузки
+        saving(false)
+      });
   }
 });
+
 popupEdit.setEventListeners();
 
 
@@ -154,7 +155,8 @@ const popupAdd = new PopupWithForm ({
         saving(false)
       });
   },
-})
+});
+
 popupAdd.setEventListeners();
 
 
@@ -182,6 +184,7 @@ const popupAvatar = new PopupWithForm({
       });
   }
 });
+
 popupAvatar.setEventListeners();
 
 
@@ -191,8 +194,18 @@ const popupImage = new PopupWithImage({
   imageSelector: '.popup__big-img',
   imageCaptionSelector: '.popup__caption'
 });
+
 popupImage.setEventListeners();
 
+// Создаем экземляр класса для формы ректирования профиля (включаем валидацию полей)
+const editValid = new FormValidator(configObj, formEdit);
+editValid.enableValidation();
+// Создаем экземляр класса для формы добавления карточки (включаем валидацию полей)
+const addValid = new FormValidator(configObj, formAdd);
+addValid.enableValidation();
+// Создаем экземляр класса для формы обновления аватара (включаем валидацию полей)
+const avatarValid = new FormValidator(configObj, formAvatar);
+avatarValid.enableValidation();
 
 // Функция предварительной подготовки и проверки
 // попапа редактирования профиля перед открытием
@@ -221,18 +234,6 @@ function avatarPopupPreInit() {
   avatarValid.popupPreInit(formAvatar, inputsListFormAvatar, avatarValid, editAvatarBtn, configObj);
   popupAvatar.open();
 }
-
-
-// Создаем экземляр класса для формы ректирования профиля (включаем валидацию полей)
-const editValid = new FormValidator(configObj, formEdit);
-editValid.enableValidation();
-// Создаем экземляр класса для формы добавления карточки (включаем валидацию полей)
-const addValid = new FormValidator(configObj, formAdd);
-addValid.enableValidation();
-// Создаем экземляр класса для формы обновления аватара (включаем валидацию полей)
-const avatarValid = new FormValidator(configObj, formAvatar);
-avatarValid.enableValidation();
-
 
 // СЛУШАТЕЛИ СОБЫТИЙ
 // Слушатель на открытие модального окна редактирования профиля

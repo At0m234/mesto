@@ -19,6 +19,7 @@ export class PopupWithForm extends Popup {
     // Возвращаем заполненный объект
     return this._formValues;
   }
+
   // Публичный метод добавляет обработчики клика иконке закрытия, оверлэю и Esc,
   // а также добавляет обработчик сабмита формы
   setEventListeners() {
@@ -35,6 +36,7 @@ export class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues(), this.close());
     })
   }
+
   // Публичный метод закрытия попапа и очистки формы
   close() {
     // Наследуем родительский метод закрытия формы
@@ -42,4 +44,5 @@ export class PopupWithForm extends Popup {
     // Очищаем форму
     this._popup.querySelector('.popup__container').reset();
   }
+  
 }

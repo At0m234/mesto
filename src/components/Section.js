@@ -10,11 +10,13 @@ export class Section {
     // Селектор контейнера, в который нужно добавлять созданные элементы
     this._container = сontainerSelector;
   }
-  // Приветный метод, отвечающий за отрисовку всех элементов.
+
+  // Публичный метод, отвечающий за отрисовку всех элементов.
   // Отрисовка каждого отдельного элемента должна осуществляться функцией renderer
   renderItems(data, userId) {
     data.forEach(item => this._renderer(item, userId));
   }
+
   // Публичный метод, который принимает DOM-элемент и добавляет его в контейнер
   addItem(element, newCard) {
     if(newCard) {
@@ -23,4 +25,5 @@ export class Section {
       this._container.append(element);
     }
   }
+  
 }

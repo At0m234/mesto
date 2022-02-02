@@ -6,6 +6,7 @@ export class PopupWithImage extends Popup {
     this._image = this._popup.querySelector(imageSelector);
     this._imageCaption = this._popup.querySelector(imageCaptionSelector);
   }
+
   // Публичный метод открытия попапа
   open(cardImg) {
     // Вставляет в попап картинку и атрибут src изображения и подпись к картинке
@@ -15,4 +16,5 @@ export class PopupWithImage extends Popup {
     // Родительский метод открытия попапа
     super.open();
   }
+  
 }

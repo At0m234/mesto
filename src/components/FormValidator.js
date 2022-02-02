@@ -47,15 +47,15 @@ export class FormValidator {
   // Приватный метод изменения состояния кнопки сабмита
   _toggleButtonState(inputElements, buttonElement, configObj) {
     // Если есть хотя бы один невалидный инпут
-      if (this._hasInvalidInput(inputElements)) {
+    if (this._hasInvalidInput(inputElements)) {
     // сделает кнопку неактивной
-        buttonElement.classList.add(configObj.inactiveButtonClass);
-        buttonElement.setAttribute('disabled', 'true');
-        } else {
+    buttonElement.classList.add(configObj.inactiveButtonClass);
+    buttonElement.setAttribute('disabled', 'true');
+    } else {
     // иначе сделакт кнопку активной
-        buttonElement.classList.remove(configObj.inactiveButtonClass);
-        buttonElement.removeAttribute('disabled');
-        }
+    buttonElement.classList.remove(configObj.inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
+    }
   }
 
   // Приватный метод установки слушателей
@@ -80,8 +80,8 @@ export class FormValidator {
 
   // Публичный метод, который включает валидацию формы
   enableValidation() {
-      this._setEventListeners(this._formElement, this._configObj);
-    }
+    this._setEventListeners(this._formElement, this._configObj);
+  }
 
   popupPreInit(formElement, inputElements, formValid, buttonElement, configObj) {
     inputElements.forEach((inputElement) => {
@@ -97,5 +97,4 @@ export class FormValidator {
       this._formElement.reset()
     }
   }
-
 }

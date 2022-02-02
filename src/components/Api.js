@@ -7,6 +7,7 @@ export class Api {
       'Content-Type': 'application/json',
     }
   }
+
   // Приватный метод проверки ответа сервера и преобразование из json
   _getResponseData(additionalUrl, optionsObj) {
     return fetch(this._url + additionalUrl, optionsObj)
@@ -14,7 +15,6 @@ export class Api {
         if (res.ok) {
           return res.json()
         }
-        // Лучше всего return Promise.reject(new Error(`Ошибка: ${res.status}`));
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   }

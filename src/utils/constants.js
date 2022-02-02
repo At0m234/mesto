@@ -21,7 +21,6 @@ export const editAvatar = document.querySelector(".profile__img-btn");
 export const editAvatarBtn = formAvatar.elements.avatar;
 export const inputsListFormAvatar = Array.from(formAvatar.querySelectorAll('.popup__text'));
 
-
 // Объект с селекторами классов форм
 export const configObj = {
   formSelector: '.popup__container',
