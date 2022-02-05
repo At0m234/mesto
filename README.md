@@ -19,18 +19,18 @@
 Установлен Webpack, Babel, настроена обработка HTML, CSS, изображений и шрифтов.
 ___
 
-## ___Webpack команды___
+## ___Available Scripts___
  - npm install - установка всех пакетов зависимостей из package.json;
  - npm run build - сборка проекта в папку dist;
- - npm run dev - запуск режима разработчика с горячей перезагрузкой;
- - npm run deploy - деплой сборки на gh-pages.
+ - npm run dev - запуск режима разработчика с горячей перезагрузкой на http://localhost:8080/;
+ - npm run deploy - деплой папки dist на ветку удаленного репозитория gh-pages.
 ___
 
 ## ___GitHub Pages___
 * [Ссылка на проектную работу](https://At0m234.github.io/mesto/)
 ___
 
-## ___Технологический стек:___
+## ___Technology stack:___
 1. HTML
 2. CSS
 3. Native JavaScript
