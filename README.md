@@ -1,6 +1,6 @@
 # __Yandex.Practicum. Web Development training course. Project work No. 4-9: Mesto Russia__
 ## __Functionality__
-"Mesto Russia" - a single-page web application based on a layout from Figma.
+"Mesto Russia" - adaptive single-page web application based on a layout from Figma.
 
 The application is created using HTML, CSS (flexbox, grid), Native JavaScript, Webpack, REST API. The project is connected to the Yandex.Practicum server.
 
