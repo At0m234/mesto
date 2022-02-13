@@ -1,39 +1,39 @@
-# ___Учебные проектные работы № 4 - 9: Места России___
-## ___Обзор___
-Учебный проект "Места России" - одностраничное веб-приложение, созданное по макету из Figma.
+# __Yandex.Practicum. Web Development training course. Project work No. 4-9: Mesto Russia__
+## __Functionality__
+"Mesto Russia" - a single-page web application based on a layout from Figma.
 
-Приложение позволяет пользователю:
-- добавлять и удалять свои карточки с фотографиями и названиями;
-- ставить и удалять лайки;
-- редактировать информацию о себе (имя, профессия);
-- изменять свою аватарку.
-## ___Функциональность___
-Приложение создано с использованием HTML, CSS (flexbox, grid), Native JavaScript, Webpack, REST API. Проект подключен к серверу Яндекс.Практикума.
+The application is created using HTML, CSS (flexbox, grid), Native JavaScript, Webpack, REST API. The project is connected to the Yandex.Practicum server.
 
-Приложение оптимизировано под разрешения экранов от 320px до бесконечности. При вёрстке использован подход Desktop First.
+The application is optimized for screen resolutions from 320px to infinity. The Desktop First approach was used in the layout.
 
-Реализована валидация JavaScript`ом: при вводе некорректных данных в одном из полей кнопка отправки формы блокируется, под полем с неверно введенными данными отображается стилизованное сообщение об ошибке.
+JavaScript validation is implemented: when entering incorrect data in one of the fields, the form submission button is blocked, a stylized error message is displayed under the field with incorrectly entered data.
 
-Весь JavaScript-код разбит на классы, с применением слабого связывания между классами. Константы вынесены в отдельный модуль.
+All JavaScript code is divided into classes, using weak binding between classes. The constants are placed in a separate module.
 
-Установлен Webpack, Babel, настроена обработка HTML, CSS, изображений и шрифтов.
-___
+Webpack, Babel is installed, HTML, CSS, images and fonts processing is configured.
 
-## ___Available Scripts___
- - npm install - установка всех пакетов зависимостей из package.json;
- - npm run build - сборка проекта в папку dist;
- - npm run dev - запуск режима разработчика с горячей перезагрузкой на http://localhost:8080/;
- - npm run deploy - деплой папки dist на ветку удаленного репозитория gh-pages.
-___
+The application allows the user to:
+- add and delete own cards with photos and names;
+- put and delete likes;
+- edit information about yourself (name, profession);
+- change own avatar.
 
-## ___GitHub Pages___
-* [Ссылка на проектную работу](https://At0m234.github.io/mesto/)
-___
+## __[GitHub Pages](https://At0m234.github.io/mesto/)__
 
-## ___Technology stack:___
-1. HTML
-2. CSS
-3. Native JavaScript
-4. Webpack
-5. REST API
+## __Available Scripts__
+### `npm install` 
+installing all dependencies from package.json;
+### `npm run build`
+building a project in the "dist" folder;
+### `npm run dev`
+[launch](http://localhost:8080/) developer mode with a hot reload on http://localhost:8080/ in the browser;
+### `npm run deploy`
+deploy the "dist" folder to the gh-pages branch of the remote repository.
 
+## __Stack:__
+
+### `HTML`
+### `CSS`
+### `Native JavaScript`
+### `Webpack`
+### `REST API`
