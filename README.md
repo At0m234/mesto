@@ -26,7 +26,7 @@ installing all dependencies from package.json;
 ### `npm run build`
 building a project in the "dist" folder;
 ### `npm run dev`
-[launch](http://localhost:8080/) developer mode with a hot reload on http://localhost:8080/ in the browser;
+launch developer mode with a hot reload on http://localhost:8080/ in the browser;
 ### `npm run deploy`
 deploy the "dist" folder to the gh-pages branch of the remote repository.
 
