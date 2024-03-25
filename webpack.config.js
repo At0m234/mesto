@@ -4,39 +4,42 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    main: './src/pages/index.js'
+    main: "./src/pages/index.js",
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "main.js",
   },
   module: {
-    rules: [ // rules — это массив правил
+    rules: [
+      // rules — это массив правил
       // добавим в него объект правил для бабеля
       {
         // регулярное выражение, которое ищет все js файлы
         test: /\.js$/,
         // при обработке этих файлов нужно использовать babel-loader
-        loader: 'babel-loader',
+        loader: "babel-loader",
         // исключает папку node_modules, файлы в ней обрабатывать не нужно
-        exclude: '/node_modules/'
+        exclude: "/node_modules/",
       },
       {
-        // регулярное выражение, которое ищет все файлы с такими расширениями
-        test: /.(png|svg|jpg|gif)$/,
-        // при обработке этих файлов нужно использовать file-loader
-        loader: 'file-loader?name=./images/[name].[ext]'
+        test: /\.(png|svg|jpg|gif)$/,
+        loader: "file-loader",
+        options: {
+          name: "./images/[name].[ext]",
+        },
       },
       {
-         // регулярное выражение, которое ищет все файлы с такими расширениями
-        test: /.(eot|ttf|woff|woff2)$/,
-        // при обработке этих файлов нужно использовать file-loader
-        loader: 'file-loader?name=./vendor/[name].[ext]',
+        test: /\.(eot|ttf|woff|woff2)$/,
+        loader: "file-loader",
+        options: {
+          name: "./vendor/[name].[ext]",
+        },
       },
       // аналогично добавьте правило для работы с html
       {
         test: /\.html$/,
-        loader: 'html-loader',
+        loader: "html-loader",
       },
       {
         // применять это правило только к CSS-файлам
@@ -45,23 +48,23 @@ module.exports = {
         // MiniCssExtractPlugin.loader и css-loader
         // заменили строку css-loader на объект
         // для «Вебпака» это то же самое
-        loader: [
+        use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             // добавьте объект options
-            options: { importLoaders: 1 }
+            options: { importLoaders: 1 },
           },
-          'postcss-loader'
-        ]
-      }
-    ]
+          "postcss-loader",
+        ],
+      },
+    ],
   },
   plugins: [
     // настроили плагин
     new HtmlWebpackPlugin({
-      template: './src/index.html' // путь к файлу index.html
+      template: "./src/index.html", // путь к файлу index.html
     }),
-    new MiniCssExtractPlugin()
-  ]
+    new MiniCssExtractPlugin(),
+  ],
 };
